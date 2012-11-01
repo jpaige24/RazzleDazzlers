@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,6 +26,11 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 public class MenuActivity extends TabActivity{
+	
+	private static final String url = "jdbc:mysql://mathcs.macalester.edu:3306/test";
+    private static final String user = "jshan";
+    private static final String pass = "razzleDazzlers";
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +85,33 @@ public class MenuActivity extends TabActivity{
 	        
 	        for (int i = 0; i < tabHostMenu.getTabWidget().getTabCount(); i++) {
 	            tabHostMenu.getTabWidget().getChildAt(i).getLayoutParams().height = 50;
-	        } 
+	        }
+	        testDB();
         }
 		
 	}
+    
+    public void testDB(){
+    	try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, user, pass);
+            /* System.out.println("Database connection success"); */
+
+            String result = "Database connection success\n";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from test");
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            while(rs.next()) {
+            	result += rsmd.getColumnName(1) + ": " + rs.getInt(1) + "\n";
+            }
+            System.out.println(result);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        } 
+    }
     
     public ArrayList<ArrayList<ArrayList<String>>> readMenu(){
     	ArrayList data = new ArrayList();
