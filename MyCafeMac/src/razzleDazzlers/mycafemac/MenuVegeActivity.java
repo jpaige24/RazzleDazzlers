@@ -6,8 +6,12 @@ import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.DishArrayAdapter;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +33,14 @@ public class MenuVegeActivity extends ListActivity {
 			}
 		}
 		
-		setListAdapter(new DishArrayAdapter(this, names, des));
+		final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+		String tmDevice = "" + tm.getDeviceId();
+		
+		ListView lv = getListView();
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.activity_menuheader, lv, false);
+		lv.addHeaderView(header, null, false);
+		setListAdapter(new DishArrayAdapter(this, names, des, tmDevice));
     }
     
 	@Override

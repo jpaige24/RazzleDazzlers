@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,18 +34,25 @@ public class MenuAllActivity extends ListActivity {
 			}
 		}
 		
-		setListAdapter(new DishArrayAdapter(this, names, des));
+		final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+		String tmDevice = "" + tm.getDeviceId();
+		
+		ListView lv = getListView();
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.activity_menuheader, lv, false);
+		lv.addHeaderView(header, null, false);
+		setListAdapter(new DishArrayAdapter(this, names, des, tmDevice));
 
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id){
 
-		System.out.println("*****");
+		//System.out.println("*****");
 		//get selected items
 		TextView textView = (TextView) v.findViewById(R.id.name);
 		String text = textView.getText().toString();
-		System.out.println(text);
+		//System.out.println(text);
 		//String selectedValue = (String) getListAdapter().getItem(position);
 		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
 
