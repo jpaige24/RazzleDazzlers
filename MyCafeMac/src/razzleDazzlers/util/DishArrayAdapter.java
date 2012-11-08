@@ -7,7 +7,9 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -15,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class DishArrayAdapter extends ArrayAdapter<String> {
+public class DishArrayAdapter extends ArrayAdapter<String>{
 	private final Context context;
 	private final ArrayList<String> names;
 	private final ArrayList<String> des;
@@ -41,11 +43,22 @@ public class DishArrayAdapter extends ArrayAdapter<String> {
 		bar.setRating((float) 3.0);
 		bar.setFocusable(false);
 		bar.setFocusableInTouchMode(false);
-		bar.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
+		bar.setOnTouchListener(new OnTouchListener() {
+		    public boolean onTouch(View v, MotionEvent event) {
+		        System.out.println(((RatingBar) v).getRating());
+		        return true;
+		    }
+		});
+		//bar.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
 		TextView description = (TextView) rowView.findViewById(R.id.description);
 		description.setText(des.get(position));
  
 		return rowView;
+	}
+	
+	public void onClick(View v) {
+		RatingBar bar = (RatingBar) v;
+		System.out.println("*******" + bar.getRating());
 	}
 	
 	private class RatingBarListener implements RatingBar.OnRatingBarChangeListener{
