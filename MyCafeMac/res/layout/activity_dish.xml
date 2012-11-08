@@ -1,0 +1,63 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/DishInfo_name"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="@drawable/bg_rect"
+            android:text="Dish Name"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/DishInfo_ratingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Dish rating:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RatingBar
+            android:id="@+id/DishInfo_ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fitsSystemWindows="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:minHeight="57dip"
+            android:numStars="5"
+            android:padding="5dp"
+            android:rating="0.0"
+            android:stepSize="1.0" />
+
+        <TextView
+            android:id="@+id/DishInfo_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect"
+            android:gravity="center_horizontal"
+            android:paddingBottom="30dp"
+            android:paddingTop="15dp"
+            android:text="Dish description"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:text="Submit Picture" />
+
+        <Gallery
+            android:id="@+id/gallery1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.69" />
+
+    </LinearLayout>
