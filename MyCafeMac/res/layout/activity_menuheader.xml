@@ -13,13 +13,12 @@
             android:layout_height="wrap_content"/>
     
     <RatingBar 
-        android:id="@+id/rating"
+        android:id="@+id/head_rating"
         android:isIndicator="true"
         android:layout_toRightOf="@+id/today"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"

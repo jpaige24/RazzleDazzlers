@@ -16,20 +16,20 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import razzleDazzlers.ratecafemac.R;
+import razzleDazzlers.util.Server;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.text.format.Time;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 public class MenuActivity extends TabActivity{
-	
-	private static final String url = "jdbc:mysql://mathcs.macalester.edu:3306/test";
-    private static final String user = "jshan";
-    private static final String pass = "razzleDazzlers";
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,13 @@ public class MenuActivity extends TabActivity{
     private class InitNews extends AsyncTask<String, Void, String>{
 
 		ProgressDialog progressDialog;
+		ArrayList userDishRatingAll = new ArrayList();
+		ArrayList userDishRatingVege = new ArrayList();
+		ArrayList avgDishRatingAll = new ArrayList();
+		ArrayList avgDishRatingVege = new ArrayList();
+		float r = (float) 0.0;
+		String date = "";
+		String device = "";
 		ArrayList<ArrayList<ArrayList<String>>> menu = new ArrayList<ArrayList<ArrayList<String>>>();
 
         @Override
@@ -54,8 +61,36 @@ public class MenuActivity extends TabActivity{
 		
 		@Override
 		protected String doInBackground(String... arg0) {
+			final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+			device += tm.getDeviceId();
+			Time today = new Time(Time.getCurrentTimezone());
+	    	today.setToNow();
+	    	date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
 			menu = readMenu();
-			
+			Server serv = new Server();
+			r = (float) serv.getDayRating(date);
+			for(int i=0;i<menu.get(0).get(4).size();i+=2){
+				float temp = serv.getUserDishRating(menu.get(0).get(4).get(i), date, device);
+				userDishRatingAll.add(temp);
+				if(temp < 1){
+					avgDishRatingAll.add(serv.getAvgDishRating(menu.get(0).get(4).get(i), date));
+				}else{
+					avgDishRatingAll.add((float) 0.0);
+				}
+			}
+			for(int i=0;i<menu.get(1).get(4).size();i+=2){
+				float tempV = serv.getUserDishRating(menu.get(1).get(4).get(i), date, device);
+				userDishRatingVege.add(tempV);
+				if(tempV < 1){
+					avgDishRatingVege.add(serv.getAvgDishRating(menu.get(0).get(4).get(i), date));
+				}else{
+					avgDishRatingVege.add((float) 0.0);
+				}
+			}
+			System.out.println("userDishRatingAll" + userDishRatingAll);
+			System.out.println("avgDishRatingAll"+avgDishRatingAll);
+			System.out.println("userDishRatingVege"+userDishRatingVege);
+			System.out.println("avgDishRatingVege"+avgDishRatingVege);
 			return null;
 		}
 		
@@ -69,14 +104,24 @@ public class MenuActivity extends TabActivity{
 	        // setting Title and Icon for the Tab
 	        menuAllSpec.setIndicator("All", getResources().getDrawable(R.drawable.icon_menuall_tab));
 	        Intent menuAllIntent = new Intent(MenuActivity.this, MenuAllActivity.class);
-	        menuAllIntent.putExtra("allMenu", menu.get(0).get(0));
+	        menuAllIntent.putExtra("allMenu", menu.get(0).get(4));
+	        menuAllIntent.putExtra("r", r);
+	        menuAllIntent.putExtra("date", date);
+	        menuAllIntent.putExtra("device", device);
+	        menuAllIntent.putExtra("userRating", userDishRatingAll);
+	        menuAllIntent.putExtra("avgRating", avgDishRatingAll);
 	        menuAllSpec.setContent(menuAllIntent);
 	 
 	        // Tab for Vege Menu
-	        TabSpec menuVegeSpec = tabHostMenu.newTabSpec("Vege");
-	        menuVegeSpec.setIndicator("Vege", getResources().getDrawable(R.drawable.icon_menuvege_tab));
+	        TabSpec menuVegeSpec = tabHostMenu.newTabSpec("Veggie");
+	        menuVegeSpec.setIndicator("Veggie", getResources().getDrawable(R.drawable.icon_menuvege_tab));
 	        Intent menuVegeIntent = new Intent(MenuActivity.this, MenuVegeActivity.class);
-	        menuVegeIntent.putExtra("vegeMenu", menu.get(1).get(0));
+	        menuVegeIntent.putExtra("vegeMenu", menu.get(1).get(4));
+	        menuVegeIntent.putExtra("r", r);
+	        menuVegeIntent.putExtra("date", date);
+	        menuVegeIntent.putExtra("device", device);
+	        menuVegeIntent.putExtra("userRating", userDishRatingVege);
+	        menuVegeIntent.putExtra("avgRating", avgDishRatingVege);
 	        menuVegeSpec.setContent(menuVegeIntent);
 	 
 	        // Adding all TabSpec to TabHost
@@ -86,32 +131,9 @@ public class MenuActivity extends TabActivity{
 	        for (int i = 0; i < tabHostMenu.getTabWidget().getTabCount(); i++) {
 	            tabHostMenu.getTabWidget().getChildAt(i).getLayoutParams().height = 50;
 	        }
-	        testDB();
         }
 		
 	}
-    
-    public void testDB(){
-    	try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url, user, pass);
-            /* System.out.println("Database connection success"); */
-
-            String result = "Database connection success\n";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from test");
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            while(rs.next()) {
-            	result += rsmd.getColumnName(1) + ": " + rs.getInt(1) + "\n";
-            }
-            System.out.println(result);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            System.out.println(e.toString());
-        } 
-    }
     
     public ArrayList<ArrayList<ArrayList<String>>> readMenu(){
     	ArrayList data = new ArrayList();

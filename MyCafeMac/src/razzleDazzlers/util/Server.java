@@ -16,6 +16,12 @@ public class Server {
 	
 	public Server(){
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			this.connection = DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -23,19 +29,87 @@ public class Server {
 		}
 	}
 	
-	public static Connection connect(){
-		try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = connection;
-            /* System.out.println("Database connection success"); */
-
-            return con;
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }
-		return null; 
+	public float getAvgDishRating(String name, String date){
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"SELECT AVG(rating) from dishRating WHERE date=" + date +
+						" and dish= '"+ name+ "';";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get avg_dish");
+				float r = (float) 0.0;
+	            while(rs.next()) {
+	            	r += rs.getFloat(1);
+	            }
+	            System.out.println("Dish avg rating = "+r);
+	            return r;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get avg dish rating");
+		}
+		return (float) 0.0;
+	}
+	
+	public float getUserDishRating(String name, String date, String user){
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"SELECT AVG(rating) from dishRating WHERE date=" + date +
+						" and dish= '"+ name+ "' and user = '" + user +"';";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get user_dish");
+				float r = (float) 0.0;
+	            while(rs.next()) {
+	            	r += rs.getFloat(1);
+	            }
+	            System.out.println("Dish user rating = "+r);
+	            return r;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get user dish rating");
+		}
+		return (float) 0.0;
+	}
+	
+	public float getDayRating(String date){
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"SELECT AVG(rating) from dishRating WHERE date=" + date +";";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get avg_day");
+				float r = (float) 0.0;
+	            while(rs.next()) {
+	            	r += rs.getFloat(1);
+	            }
+	            System.out.println("Day avg rating = "+r);
+	            return r;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get avg day rating");
+		}
+		return (float) 0.0;
 	}
 	
 	public void insert(String user, String date, String dishName, float rating){
@@ -55,7 +129,7 @@ public class Server {
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("Database Server Error");
+			System.out.println("Database Server Error: Insert");
 		}
 	}
 	
@@ -76,7 +150,7 @@ public class Server {
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("Database Server Error");
+			System.out.println("Database Server Error: Update");
 		}
 	}
 	
@@ -107,7 +181,7 @@ public class Server {
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("Database Server Error");
+			System.out.println("Database Server Error: Check");
 		}
 		return false;
 	}
