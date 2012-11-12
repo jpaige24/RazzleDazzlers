@@ -4,11 +4,369 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
+  
+  <TextView 
+      android:text="Best Dish Ever"
+      android:padding="10dip"
+      android:textSize="25dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"/>
 
-  <TextView android:text="Leaderboard Dish"
-            android:padding="15dip"
-            android:textSize="18dip"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
- 
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDishNum1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="1. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDish1"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDishNum1"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDishRating1"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDishNum1"/>
+    
+  </RelativeLayout>
+  
+   <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDishNum2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="2. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDish2"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDishNum2"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDishRating2"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDishNum2"/>
+    
+  </RelativeLayout>
+  
+    <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDishNum3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="3. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDish3"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDishNum3"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDishRating3"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDishNum3"/>
+    
+  </RelativeLayout>
+  
+     <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDishNum4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="4. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDish4"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDishNum4"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDishRating4"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDishNum4"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDishNum5"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="5. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDish5"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDishNum5"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDishRating5"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDishNum5"/>
+    
+  </RelativeLayout>
+  
+  <TextView 
+      android:text="Worst Dish Ever"
+      android:padding="10dip"
+      android:textSize="25dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"/>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDishNum1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="1. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDish1"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDishNum1"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDishRating1"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDishNum1"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDishNum2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="2. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDish2"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDishNum2"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDishRating2"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDishNum2"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDishNum3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="3. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDish3"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDishNum3"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDishRating3"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDishNum3"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDishNum4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="4. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDish4"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDishNum4"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDishRating4"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDishNum4"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDishNum5"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="5. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDish5"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDishNum5"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDishRating5"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDishNum5"/>
+    
+  </RelativeLayout> 
+  
 </LinearLayout>

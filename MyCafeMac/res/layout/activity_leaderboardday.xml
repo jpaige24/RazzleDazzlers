@@ -1,14 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+  
+  <TextView 
+      android:text="Best Day Ever"
+      android:padding="10dip"
+      android:textSize="25dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"/>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDayNum1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="1. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDay1"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDayNum1"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDayRating1"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDayNum1"/>
+    
+  </RelativeLayout>
 
-  <TextView android:text="Leaderboard Day"
-            android:padding="15dip"
-            android:textSize="18dip"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDayNum2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="2. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDay2"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDayNum2"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDayRating2"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDayNum2"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDayNum3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="3. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDay3"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDayNum3"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDayRating3"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDayNum3"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDayNum4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="4. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDay4"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDayNum4"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDayRating4"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDayNum4"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/BestDayNum5"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="5. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/BestDay5"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/BestDayNum5"/>
+    
+    <RatingBar 
+        android:id="@+id/BestDayRating5"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/BestDayNum5"/>
+    
+  </RelativeLayout>
+  
+  <TextView 
+      android:text="Worst Day Ever"
+      android:padding="10dip"
+      android:textSize="25dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"/>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDayNum1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="1. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDay1"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDayNum1"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDayRating1"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDayNum1"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDayNum2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="2. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDay2"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDayNum2"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDayRating2"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDayNum2"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDayNum3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="3. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDay3"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDayNum3"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDayRating3"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDayNum3"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDayNum4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="4. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDay4"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDayNum4"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDayRating4"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDayNum4"/>
+    
+  </RelativeLayout>
+  
+  <RelativeLayout 
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent" >
+    
+    <TextView
+         android:id="@+id/WorstDayNum5"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="30dp"
+         android:text="5. "
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+      	android:id="@+id/WorstDay5"
+      	android:layout_width="222dp"
+      	android:layout_height="match_parent"
+      	android:textSize="30dp"
+      	android:text="This is a test" 
+      	android:layout_toRightOf="@+id/WorstDayNum5"/>
+    
+    <RatingBar 
+        android:id="@+id/WorstDayRating5"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/WorstDayNum5"/>
+    
+  </RelativeLayout>
+  
+  
+  
+  
+
+  
  
 </LinearLayout>
