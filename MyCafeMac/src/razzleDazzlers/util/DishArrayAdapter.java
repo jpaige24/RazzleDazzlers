@@ -67,12 +67,12 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		    		float y = event.getY();
 		    		System.out.println("****"+x+"****"+y);
 		    		float star = (float) 0.0;
-		    		if(x > 12 && x < 75)star = (float) 1.0;
-		    		if(x > 97 && x < 160)star = (float) 2.0;
-		    		if(x > 185 && x < 249)star = (float) 3.0;
-		    		if(x > 270 && x < 330)star = (float) 4.0;
-		    		if(x > 360 && x < 406)star = (float) 5.0;
-		    		if(x > 12 && x < 406){
+		    		if(x > 8 && x < 63)star = (float) 1.0;
+		    		if(x > 83 && x < 140)star = (float) 2.0;
+		    		if(x > 158 && x < 212)star = (float) 3.0;
+		    		if(x > 232 && x < 289)star = (float) 4.0;
+		    		if(x > 308 && x < 364)star = (float) 5.0;
+		    		if(x > 8 && x < 364){
 		    			((RatingBar) v).setRating(star);
 			    		//System.out.println(((RatingBar) v).getRating());
 			    		TextView text = (TextView) ((View) v.getParent()).findViewById(R.id.name);

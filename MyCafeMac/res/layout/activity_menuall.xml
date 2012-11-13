@@ -18,6 +18,8 @@
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
+        android:layout_gravity="center_horizontal"
+        android:progressDrawable="@drawable/custom_rating_bar"
 		android:stepSize="1.0"
 		android:numStars="5"
 		android:rating="0.0"
