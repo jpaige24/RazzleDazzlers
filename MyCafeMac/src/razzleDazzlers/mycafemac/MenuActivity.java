@@ -2,6 +2,7 @@ package razzleDazzlers.mycafemac;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 
 import java.sql.Connection;
@@ -50,6 +51,7 @@ public class MenuActivity extends TabActivity{
 		float r = (float) 0.0;
 		String date = "";
 		String device = "";
+		int day = 0;
 		ArrayList<ArrayList<ArrayList<String>>> menu = new ArrayList<ArrayList<ArrayList<String>>>();
 
         @Override
@@ -57,6 +59,10 @@ public class MenuActivity extends TabActivity{
         {
             progressDialog = ProgressDialog.show(MenuActivity.this, "",
                     "Loading Menu...");
+            Calendar calendar = Calendar.getInstance();
+	    	day = calendar.get(Calendar.DAY_OF_WEEK)-2;
+	    	if (day < 0 || day > 4) day = 4; 
+            
         }
 		
 		@Override
@@ -66,23 +72,24 @@ public class MenuActivity extends TabActivity{
 			Time today = new Time(Time.getCurrentTimezone());
 	    	today.setToNow();
 	    	date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
-			menu = readMenu();
+	    	
+	    	menu = readMenu();
 			Server serv = new Server();
 			r = (float) serv.getDayRating(date);
-			for(int i=0;i<menu.get(0).get(4).size();i+=2){
-				float temp = serv.getUserDishRating(menu.get(0).get(4).get(i), date, device);
+			for(int i=0;i<menu.get(0).get(day).size();i+=2){
+				float temp = serv.getUserDishRating(menu.get(0).get(day).get(i), date, device);
 				userDishRatingAll.add(temp);
 				if(temp < 1){
-					avgDishRatingAll.add(serv.getAvgDishRating(menu.get(0).get(4).get(i), date));
+					avgDishRatingAll.add(serv.getAvgDishRating(menu.get(0).get(day).get(i), date));
 				}else{
 					avgDishRatingAll.add((float) 0.0);
 				}
 			}
-			for(int i=0;i<menu.get(1).get(4).size();i+=2){
-				float tempV = serv.getUserDishRating(menu.get(1).get(4).get(i), date, device);
+			for(int i=0;i<menu.get(1).get(day).size();i+=2){
+				float tempV = serv.getUserDishRating(menu.get(1).get(day).get(i), date, device);
 				userDishRatingVege.add(tempV);
 				if(tempV < 1){
-					avgDishRatingVege.add(serv.getAvgDishRating(menu.get(0).get(4).get(i), date));
+					avgDishRatingVege.add(serv.getAvgDishRating(menu.get(1).get(day).get(i), date));
 				}else{
 					avgDishRatingVege.add((float) 0.0);
 				}
@@ -104,7 +111,7 @@ public class MenuActivity extends TabActivity{
 	        // setting Title and Icon for the Tab
 	        menuAllSpec.setIndicator("All", getResources().getDrawable(R.drawable.icon_menuall_tab));
 	        Intent menuAllIntent = new Intent(MenuActivity.this, MenuAllActivity.class);
-	        menuAllIntent.putExtra("allMenu", menu.get(0).get(4));
+	        menuAllIntent.putExtra("allMenu", menu.get(0).get(day));
 	        menuAllIntent.putExtra("r", r);
 	        menuAllIntent.putExtra("date", date);
 	        menuAllIntent.putExtra("device", device);
@@ -116,7 +123,7 @@ public class MenuActivity extends TabActivity{
 	        TabSpec menuVegeSpec = tabHostMenu.newTabSpec("Veggie");
 	        menuVegeSpec.setIndicator("Veggie", getResources().getDrawable(R.drawable.icon_menuvege_tab));
 	        Intent menuVegeIntent = new Intent(MenuActivity.this, MenuVegeActivity.class);
-	        menuVegeIntent.putExtra("vegeMenu", menu.get(1).get(4));
+	        menuVegeIntent.putExtra("vegeMenu", menu.get(1).get(day));
 	        menuVegeIntent.putExtra("r", r);
 	        menuVegeIntent.putExtra("date", date);
 	        menuVegeIntent.putExtra("device", device);
