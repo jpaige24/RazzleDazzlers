@@ -40,7 +40,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		this.userRating = userRating;
 		this.avg = avg;
 	}
- 
+  
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
