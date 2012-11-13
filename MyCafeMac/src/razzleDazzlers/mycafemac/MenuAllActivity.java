@@ -67,14 +67,24 @@ public class MenuAllActivity extends ListActivity {
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id){
-
+		
+		Intent dishIntent = new Intent(MenuAllActivity.this, DishActivity.class);
 		//System.out.println("*****");
 		//get selected items
-		TextView textView = (TextView) v.findViewById(R.id.name);
-		String text = textView.getText().toString();
+		TextView name = (TextView) v.findViewById(R.id.name);
+		String nameText = name.getText().toString();
+		dishIntent.putExtra("dishName", nameText);
+		
+		TextView description = (TextView) v.findViewById(R.id.description);
+		String desText = description.getText().toString();
+		dishIntent.putExtra("dishDescription", desText);
+		
+		RatingBar rating = (RatingBar) v.findViewById(R.id.rating);
+		Float ratingFloat = rating.getRating();
+		dishIntent.putExtra("dishRating", ratingFloat);
 		//System.out.println(text);
 		//String selectedValue = (String) getListAdapter().getItem(position);
-		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-
+		Toast.makeText(this, nameText, Toast.LENGTH_SHORT).show();
+		MenuAllActivity.this.startActivity(dishIntent);
 	}
 }

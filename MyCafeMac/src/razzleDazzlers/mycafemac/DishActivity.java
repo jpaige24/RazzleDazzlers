@@ -13,10 +13,10 @@ public class DishActivity extends Activity {
         setContentView(R.layout.activity_dish);
         String dishName = getIntent().getStringExtra("dishName");
         String dishDescription = getIntent().getStringExtra("dishDescription");
-        int rating = getIntent().getIntExtra("dishRating", 0);
+        float rating = getIntent().getFloatExtra("dishRating", 0);
         
         RatingBar ratingBar = (RatingBar) findViewById(R.id.DishInfo_ratingBar);
-        ratingBar.setNumStars(rating);
+        ratingBar.setRating(rating);
         
         TextView dishNameView = (TextView) findViewById(R.id.DishInfo_name);
         dishNameView.setText(dishName);
