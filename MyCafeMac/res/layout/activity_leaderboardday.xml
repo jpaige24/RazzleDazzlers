@@ -32,14 +32,6 @@
          android:text="1. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <TextView
-      	android:id="@+id/BestDay1"
-      	android:layout_width="222dp"
-      	android:layout_height="wrap_content"
-      	android:textSize="30dp"
-      	android:text="This is a test" 
-      	android:layout_toRightOf="@+id/BestDayNum1"/>
-    
     <RatingBar 
         android:id="@+id/BestDayRating1"
         android:isIndicator="true"
@@ -54,6 +46,15 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/BestDayNum1"/>
+
+    <TextView
+        android:id="@+id/BestDay1"
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/BestDayNum1"
+        android:text="This is a test"
+        android:textSize="30dp" />
     
   </RelativeLayout>
 
