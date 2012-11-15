@@ -83,7 +83,7 @@ public class MenuAllActivity extends ListActivity {
 		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.activity_menuheader, lv, false);
 		
 		bar = (RatingBar) header.findViewById(R.id.head_rating);
-		bar.setStepSize((float) 1.0);
+		//bar.setStepSize((float) 1.0);
 		bar.setRating(r);
 		
 		lv.addHeaderView(header, null, false);
