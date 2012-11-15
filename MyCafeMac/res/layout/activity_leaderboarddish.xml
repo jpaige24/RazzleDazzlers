@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"  
+    android:isScrollContainer="true" 
+    android:scrollbarAlwaysDrawVerticalTrack="true" 
+    android:scrollbarStyle="outsideInset" 
+    android:scrollbars="vertical">
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
@@ -27,7 +34,7 @@
     
     <TextView
       	android:id="@+id/BestDish1"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -35,15 +42,16 @@
     
     <RatingBar 
         android:id="@+id/BestDishRating1"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDishNum1"/>
+		android:layout_below="@+id/BestDish1"/>
     
   </RelativeLayout>
   
@@ -62,7 +70,7 @@
     
     <TextView
       	android:id="@+id/BestDish2"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -70,15 +78,16 @@
     
     <RatingBar 
         android:id="@+id/BestDishRating2"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDishNum2"/>
+		android:layout_below="@+id/BestDish2"/>
     
   </RelativeLayout>
   
@@ -97,7 +106,7 @@
     
     <TextView
       	android:id="@+id/BestDish3"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -105,15 +114,16 @@
     
     <RatingBar 
         android:id="@+id/BestDishRating3"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDishNum3"/>
+		android:layout_below="@+id/BestDish3"/>
     
   </RelativeLayout>
   
@@ -132,7 +142,7 @@
     
     <TextView
       	android:id="@+id/BestDish4"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -140,15 +150,16 @@
     
     <RatingBar 
         android:id="@+id/BestDishRating4"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDishNum4"/>
+		android:layout_below="@+id/BestDish4"/>
     
   </RelativeLayout>
   
@@ -167,7 +178,7 @@
     
     <TextView
       	android:id="@+id/BestDish5"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -175,15 +186,16 @@
     
     <RatingBar 
         android:id="@+id/BestDishRating5"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDishNum5"/>
+		android:layout_below="@+id/BestDish5"/>
     
   </RelativeLayout>
   
@@ -209,7 +221,7 @@
     
     <TextView
       	android:id="@+id/WorstDish1"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -217,15 +229,16 @@
     
     <RatingBar 
         android:id="@+id/WorstDishRating1"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/WorstDishNum1"/>
+		android:layout_below="@+id/WorstDish1"/>
     
   </RelativeLayout>
   
@@ -244,7 +257,7 @@
     
     <TextView
       	android:id="@+id/WorstDish2"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -252,15 +265,16 @@
     
     <RatingBar 
         android:id="@+id/WorstDishRating2"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/WorstDishNum2"/>
+		android:layout_below="@+id/WorstDish2"/>
     
   </RelativeLayout>
   
@@ -279,7 +293,7 @@
     
     <TextView
       	android:id="@+id/WorstDish3"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -287,15 +301,16 @@
     
     <RatingBar 
         android:id="@+id/WorstDishRating3"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/WorstDishNum3"/>
+		android:layout_below="@+id/WorstDish3"/>
     
   </RelativeLayout>
   
@@ -314,7 +329,7 @@
     
     <TextView
       	android:id="@+id/WorstDish4"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -322,15 +337,16 @@
     
     <RatingBar 
         android:id="@+id/WorstDishRating4"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/WorstDishNum4"/>
+		android:layout_below="@+id/WorstDish4"/>
     
   </RelativeLayout>
   
@@ -349,7 +365,7 @@
     
     <TextView
       	android:id="@+id/WorstDish5"
-      	android:layout_width="222dp"
+      	android:layout_width="match_parent"
       	android:layout_height="match_parent"
       	android:textSize="30dp"
       	android:text="This is a test" 
@@ -357,16 +373,18 @@
     
     <RatingBar 
         android:id="@+id/WorstDishRating5"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/WorstDishNum5"/>
+		android:layout_below="@+id/WorstDish5"/>
     
   </RelativeLayout> 
   
 </LinearLayout>
+</ScrollView>

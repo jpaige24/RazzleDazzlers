@@ -8,7 +8,7 @@
         <TextView
             android:id="@+id/DishInfo_name"
             android:layout_width="match_parent"
-            android:layout_height="51dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_rect"
             android:text="Dish Name"
             android:gravity="center_horizontal"
@@ -36,7 +36,7 @@
             android:numStars="5"
             android:progressDrawable="@drawable/custom_rating_bar"
             android:rating="0.0"
-            android:stepSize="0.1" />
+            android:stepSize="1" />
 
         <TextView
             android:id="@+id/DishInfo_description"

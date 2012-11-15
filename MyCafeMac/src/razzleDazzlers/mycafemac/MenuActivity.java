@@ -1,8 +1,11 @@
 package razzleDazzlers.mycafemac;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 
 import java.sql.Connection;
@@ -18,16 +21,23 @@ import org.jsoup.select.Elements;
 
 import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.Server;
+import razzleDazzlers.util.Cache;
 import android.app.Activity;
+import android.app.LocalActivityManager;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TabHost;
+import android.widget.Toast;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
 public class MenuActivity extends TabActivity{
@@ -44,14 +54,16 @@ public class MenuActivity extends TabActivity{
     private class InitNews extends AsyncTask<String, Void, String>{
 
 		ProgressDialog progressDialog;
-		ArrayList userDishRatingAll = new ArrayList();
-		ArrayList userDishRatingVege = new ArrayList();
-		ArrayList avgDishRatingAll = new ArrayList();
-		ArrayList avgDishRatingVege = new ArrayList();
+		//ArrayList userDishRatingAll = new ArrayList();
+		//ArrayList userDishRatingVege = new ArrayList();
+		//ArrayList avgDishRatingAll = new ArrayList();
+		//ArrayList avgDishRatingVege = new ArrayList();
 		float r = (float) 0.0;
 		String date = "";
 		String device = "";
 		int day = 0;
+		ArrayList<String> todayAll = new ArrayList();
+		ArrayList<String> todayVege = new ArrayList();
 		ArrayList<ArrayList<ArrayList<String>>> menu = new ArrayList<ArrayList<ArrayList<String>>>();
 
         @Override
@@ -71,12 +83,44 @@ public class MenuActivity extends TabActivity{
 			device += tm.getDeviceId();
 			Time today = new Time(Time.getCurrentTimezone());
 	    	today.setToNow();
-	    	date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
+	    	date = Integer.toString(today.month)+'/'+Integer.toString(today.monthDay)+'/'+Integer.toString(today.year);
 	    	
-	    	menu = readMenu();
+	    	boolean update = needUpdate();
+	    	System.out.println("update? "+update);
+	    	if(update){
+	    		menu = readMenu();
+	    		System.out.println("===== Saving data... ");
+	    		saveData(menu);
+	    	}else{
+	    		System.out.println("===== Reading data... ");
+	    		ArrayList<String> keyAll = new ArrayList<String>();
+	    		keyAll.add("MondayAll");
+	    		keyAll.add("TuesdayAll");
+	    		keyAll.add("WednesdayAll");
+	    		keyAll.add("ThursdayAll");
+	    		keyAll.add("FridayAll");
+	    		ArrayList<String> keyVege = new ArrayList<String>();
+	    		keyVege.add("MondayVege");
+	    		keyVege.add("TuesdayVege");
+	    		keyVege.add("WednesdayVege");
+	    		keyVege.add("ThursdayVege");
+	    		keyVege.add("FridayVege");
+	    		if(day <= 4){
+	    			todayAll = getData(keyAll.get(day));
+	    			todayVege = getData(keyVege.get(day));
+	    		}else{
+	    			todayAll = getData(keyAll.get(4));
+	    			todayVege = getData(keyVege.get(4));
+	    		}
+	    		if(todayAll.size() == 0 || todayVege.size() == 0){
+	    			System.out.println("===== Reading failed... ");
+	    			menu = readMenu();
+	    		}
+	    	}
+	    	
 			Server serv = new Server();
 			r = (float) serv.getDayRating(date);
-			for(int i=0;i<menu.get(0).get(day).size();i+=2){
+			/*for(int i=0;i<menu.get(0).get(day).size();i+=2){
 				float temp = serv.getUserDishRating(menu.get(0).get(day).get(i), date, device);
 				userDishRatingAll.add(temp);
 				if(temp < 1){
@@ -93,47 +137,62 @@ public class MenuActivity extends TabActivity{
 				}else{
 					avgDishRatingVege.add((float) 0.0);
 				}
-			}
-			System.out.println("userDishRatingAll" + userDishRatingAll);
-			System.out.println("avgDishRatingAll"+avgDishRatingAll);
-			System.out.println("userDishRatingVege"+userDishRatingVege);
-			System.out.println("avgDishRatingVege"+avgDishRatingVege);
+			}*/
+			//System.out.println("userDishRatingAll" + userDishRatingAll);
+			//System.out.println("avgDishRatingAll"+avgDishRatingAll);
+			//System.out.println("userDishRatingVege"+userDishRatingVege);
+			//System.out.println("avgDishRatingVege"+avgDishRatingVege);
 			return null;
 		}
-		
+
 		@Override
         protected void onPostExecute(String result) {
 			progressDialog.dismiss();
-			TabHost tabHostMenu = getTabHost();
+			final TabHost tabHostMenu = getTabHost();
 	        
 	        // Tab for All Menu
 	        TabSpec menuAllSpec = tabHostMenu.newTabSpec("All");
 	        // setting Title and Icon for the Tab
 	        menuAllSpec.setIndicator("All", getResources().getDrawable(R.drawable.icon_menuall_tab));
 	        Intent menuAllIntent = new Intent(MenuActivity.this, MenuAllActivity.class);
-	        menuAllIntent.putExtra("allMenu", menu.get(0).get(day));
+	        menuAllIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        if(todayAll.size() > 0 && todayVege.size() > 0){
+	        	menuAllIntent.putExtra("allMenu", todayAll);
+	        }else{
+	        	menuAllIntent.putExtra("allMenu", menu.get(0).get(day));
+	        }
 	        menuAllIntent.putExtra("r", r);
 	        menuAllIntent.putExtra("date", date);
 	        menuAllIntent.putExtra("device", device);
-	        menuAllIntent.putExtra("userRating", userDishRatingAll);
-	        menuAllIntent.putExtra("avgRating", avgDishRatingAll);
+	        //menuAllIntent.putExtra("userRating", userDishRatingAll);
+	        //menuAllIntent.putExtra("avgRating", avgDishRatingAll);
 	        menuAllSpec.setContent(menuAllIntent);
 	 
 	        // Tab for Vege Menu
 	        TabSpec menuVegeSpec = tabHostMenu.newTabSpec("Veggie");
 	        menuVegeSpec.setIndicator("Veggie", getResources().getDrawable(R.drawable.icon_menuvege_tab));
 	        Intent menuVegeIntent = new Intent(MenuActivity.this, MenuVegeActivity.class);
-	        menuVegeIntent.putExtra("vegeMenu", menu.get(1).get(day));
+	        menuVegeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        if(todayAll.size() > 0 && todayVege.size() > 0){
+	        	menuVegeIntent.putExtra("vegeMenu", todayVege);
+	        }else{
+	        	menuVegeIntent.putExtra("vegeMenu", menu.get(1).get(day));
+	        }
 	        menuVegeIntent.putExtra("r", r);
 	        menuVegeIntent.putExtra("date", date);
 	        menuVegeIntent.putExtra("device", device);
-	        menuVegeIntent.putExtra("userRating", userDishRatingVege);
-	        menuVegeIntent.putExtra("avgRating", avgDishRatingVege);
+	        //menuVegeIntent.putExtra("userRating", userDishRatingVege);
+	        //menuVegeIntent.putExtra("avgRating", avgDishRatingVege);
 	        menuVegeSpec.setContent(menuVegeIntent);
 	 
 	        // Adding all TabSpec to TabHost
 	        tabHostMenu.addTab(menuAllSpec); // Adding all menu tab
 	        tabHostMenu.addTab(menuVegeSpec); // Adding vege menu tab
+	        
+	        tabHostMenu.setOnTabChangedListener(new OnTabChangeListener(){
+	        	public void onTabChanged(String tabId) {
+	        		Toast.makeText(getApplicationContext(), "Refreshing CafeMac ratings...", Toast.LENGTH_SHORT).show();
+	        }});
 	        
 	        for (int i = 0; i < tabHostMenu.getTabWidget().getTabCount(); i++) {
 	            tabHostMenu.getTabWidget().getChildAt(i).getLayoutParams().height = 50;
@@ -242,12 +301,75 @@ public class MenuActivity extends TabActivity{
     	return data;
     }
 
+    public ArrayList<String> getData(String key){
+    	Cache cache = new Cache();
+    	return cache.getStringArrayPref(MenuActivity.this, key); 
+    }
+    
+	public void saveData(ArrayList<ArrayList<ArrayList<String>>> menu) {
+		Calendar today = Calendar.getInstance();
+		String saveDate = today.get(Calendar.YEAR)+"/"+today.get(Calendar.MONTH)+"/"+today.get(Calendar.DATE);
+		System.out.println("=====saveDate In"+saveDate);
+		Cache cache = new Cache();
+		cache.setDatePref(MenuActivity.this, "saveDate", saveDate);
+		cache.setStringArrayPref(MenuActivity.this, "MondayAll", menu.get(0).get(0));
+		cache.setStringArrayPref(MenuActivity.this, "TuesdayAll", menu.get(0).get(1));
+		cache.setStringArrayPref(MenuActivity.this, "WednesdayAll", menu.get(0).get(2));
+		cache.setStringArrayPref(MenuActivity.this, "ThursdayAll", menu.get(0).get(3));
+		cache.setStringArrayPref(MenuActivity.this, "FridayAll", menu.get(0).get(4));
+		cache.setStringArrayPref(MenuActivity.this, "MondayVege", menu.get(1).get(0));
+		cache.setStringArrayPref(MenuActivity.this, "TuesdayVege", menu.get(1).get(1));
+		cache.setStringArrayPref(MenuActivity.this, "WednesdayVege", menu.get(1).get(2));
+		cache.setStringArrayPref(MenuActivity.this, "ThursdayVege", menu.get(1).get(3));
+		cache.setStringArrayPref(MenuActivity.this, "FridayVege", menu.get(1).get(4));
+	}
+    
+	public boolean needUpdate() {
+		Calendar today = Calendar.getInstance();
+		if(today.get(Calendar.DAY_OF_WEEK) == 2){
+			return true;
+		}
+		Cache cache = new Cache();
+		String saveDate = cache.getDatePref(MenuActivity.this, "saveDate");
+		System.out.println("=====saveDate Out"+saveDate);
+		if(saveDate!=null){
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+			Date d = null;
+			try {
+			   d = formatter.parse(saveDate);//catch exception
+			} catch (ParseException e) {
+			   // TODO Auto-generated catch block
+			   e.printStackTrace();
+			}
+			Calendar thatDay = Calendar.getInstance();
+			thatDay.setTime(d);
+			thatDay.set(Calendar.MONTH, thatDay.get(Calendar.MONTH)+1);
+			long diff = today.getTimeInMillis() - thatDay.getTimeInMillis();
+			//System.out.println("====== today" +today+"===== that day "+thatDay);
+			long days = diff/(24*60*60*1000);
+			System.out.println("=====Diff"+days);
+			int threshold = 0;
+			if(today.get(Calendar.DAY_OF_WEEK) == 1){
+				threshold = 6;
+			}else{
+				threshold = today.get(Calendar.DAY_OF_WEEK)-2;
+			}
+			if(threshold-days < 0){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+		
+	}
+
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }*/
-    
     
 }
 

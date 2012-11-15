@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
@@ -22,51 +23,127 @@ import android.widget.Toast;
 
 public class MenuVegeActivity extends ListActivity {
 	
+	String tmDevice;
+	String date;
+	ArrayList<String> vegeMenu;
+	ArrayList<String> names;
+	ArrayList<String> des;
+	int update = -1;
+	String updateName = "";
+	ArrayList userRating = new ArrayList();
+	ArrayList avgRating = new ArrayList();
+	RatingBar bar;
+	
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-       
-       ArrayList<String> vegeMenu = getIntent().getStringArrayListExtra("vegeMenu");
-        ArrayList<String> names = new ArrayList<String>();
-        ArrayList<String> des = new ArrayList<String>();
-        for(int i=0;i<vegeMenu.size();i++){
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		vegeMenu = getIntent().getStringArrayListExtra("vegeMenu");
+		names = new ArrayList<String>();
+		des = new ArrayList<String>();
+		for(int i=0;i<vegeMenu.size();i++){
 			if(i%2 == 0){
 				names.add(vegeMenu.get(i));
 			}else{
 				des.add(vegeMenu.get(i));
 			}
 		}
-        
-        String date = getIntent().getStringExtra("date");
+		date = getIntent().getStringExtra("date");
 		float r = getIntent().getFloatExtra("r", (float)0.0);
-		ArrayList userRating = (ArrayList) getIntent().getExtras().getSerializable("userRating");
-		ArrayList avgRating = (ArrayList) getIntent().getExtras().getSerializable("avgRating");
-        
-		String tmDevice = getIntent().getStringExtra("device");
+		
+		Thread t = new Thread(){
+			public void run(){
+				Server serv = new Server();
+				for(int i=0;i<vegeMenu.size();i+=2){
+					float temp = serv.getUserDishRating(vegeMenu.get(i), date, tmDevice);
+					userRating.add(temp);
+					if(temp < 1){
+						avgRating.add(serv.getAvgDishRating(vegeMenu.get(i), date));
+					}else{
+						avgRating.add((float) 0.0);
+					}
+				}
+			}
+		};
+		t.start();
+		
+		//userRating = (ArrayList) getIntent().getExtras().getSerializable("userRating");
+		//System.out.println(avg);
+		//avgRating = (ArrayList) getIntent().getExtras().getSerializable("avgRating");
+		
+		tmDevice = getIntent().getStringExtra("device");
 		
 		ListView lv = getListView();
 		LayoutInflater inflater = getLayoutInflater();
 		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.activity_menuheader, lv, false);
 		
-		RatingBar bar = (RatingBar) header.findViewById(R.id.head_rating);
+		bar = (RatingBar) header.findViewById(R.id.head_rating);
 		bar.setStepSize((float) 1.0);
 		bar.setRating(r);
 		
 		lv.addHeaderView(header, null, false);
+		//System.out.println("%%%%"+date);
 		setListAdapter(new DishArrayAdapter(this, names, des, tmDevice, date, userRating, avgRating));
-    }
-    
-	@Override
-    protected void onListItemClick(ListView l, View v, int position, long id){
-
-		System.out.println("*****");
-		//get selected items
-		TextView textView = (TextView) v.findViewById(R.id.name);
-		String text = textView.getText().toString();
-		System.out.println(text);
-		//String selectedValue = (String) getListAdapter().getItem(position);
-		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-
 	}
-    
+	
+	@Override
+	public void onResume(){
+	    super.onResume();
+	    
+//	    ArrayList refreshUserRating = new ArrayList();
+//	    ArrayList refreshAvgRating = new ArrayList();
+//	    Server serv = new Server();
+//		for(int i=0;i<allMenu.size();i+=2){
+//			float temp = serv.getUserDishRating(allMenu.get(i), date, tmDevice);
+//			refreshUserRating.add(temp);
+//			if(temp < 1){
+//				refreshAvgRating.add(serv.getAvgDishRating(allMenu.get(i), date));
+//			}else{
+//				refreshAvgRating.add((float) 0.0);
+//			}
+//		}
+	    Server serv = new Server();
+	    float r = (float) serv.getDayRating(date);
+	    bar.setRating(r);
+	    float temp = serv.getUserDishRating(updateName, date, tmDevice);
+	    if (temp > 0) userRating.set(update, temp);
+	    //System.out.println("!!!!"+temp+"!!!!"+update);
+	    setListAdapter(new DishArrayAdapter(this, names, des, tmDevice, date, userRating, avgRating));
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id){
+		
+		update = position-1;
+		
+		Intent dishIntent = new Intent(MenuVegeActivity.this, DishActivity.class);
+		//System.out.println("*****");
+		//get selected items
+		TextView name = (TextView) v.findViewById(R.id.name);
+		String nameText = name.getText().toString();
+		dishIntent.putExtra("dishName", nameText);
+		
+		updateName = nameText;
+		
+		TextView description = (TextView) v.findViewById(R.id.description);
+		String desText = description.getText().toString();
+		dishIntent.putExtra("dishDescription", desText);
+		
+		RatingBar rating = (RatingBar) v.findViewById(R.id.rating);
+		Float ratingFloat = rating.getRating();
+		dishIntent.putExtra("dishRating", ratingFloat);
+		
+		dishIntent.putExtra("device", tmDevice);
+		dishIntent.putExtra("date", date);
+		//System.out.println(text);
+		//String selectedValue = (String) getListAdapter().getItem(position);
+		//Toast.makeText(this, nameText, Toast.LENGTH_SHORT).show();
+		MenuVegeActivity.this.startActivity(dishIntent);
+	}
+	
+	/*@Override
+	 protected void onPause(){
+		 super.onPause();
+		 Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
+	 }*/
 }

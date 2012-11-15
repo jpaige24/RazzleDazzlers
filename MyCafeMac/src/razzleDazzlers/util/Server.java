@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Server {
 	
@@ -29,6 +30,134 @@ public class Server {
 		}
 	}
 	
+	public ArrayList<ArrayList<String>> getBestDishes(){
+		ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"select avg(rating),dish from dishRating " +
+						"group by dish order by avg(rating) DESC LIMIT 5;";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get avg_dish");
+				ArrayList<String> ratings = new ArrayList<String>();
+				ArrayList<String> dishes = new ArrayList<String>();
+	            while(rs.next()) {
+	            	ratings.add(rs.getString(1));
+	            	dishes.add(rs.getString(2));
+	            }
+	            board.add(ratings);
+	            board.add(dishes);
+	            //System.out.println("Best Days = "+rs);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get Worst Days");
+		}
+		return board;
+	}
+	
+	public ArrayList<ArrayList<String>> getWorstDishes(){
+		ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"select avg(rating),dish from dishRating " +
+						"group by dish order by avg(rating) LIMIT 5;";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get avg_dish");
+				ArrayList<String> ratings = new ArrayList<String>();
+				ArrayList<String> dishes = new ArrayList<String>();
+	            while(rs.next()) {
+	            	ratings.add(rs.getString(1));
+	            	dishes.add(rs.getString(2));
+	            }
+	            board.add(ratings);
+	            board.add(dishes);
+	            //System.out.println("Best Days = "+rs);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get Worst Days");
+		}
+		return board;
+	}
+	
+	public ArrayList<ArrayList<String>> getWorstDays(){
+		ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"select avg(rating),date from dishRating " +
+						"group by date order by avg(rating) LIMIT 5;";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get avg_dish");
+				ArrayList<String> ratings = new ArrayList<String>();
+				ArrayList<String> dates = new ArrayList<String>();
+	            while(rs.next()) {
+	            	ratings.add(rs.getString(1));
+	            	dates.add(rs.getString(2));
+	            }
+	            board.add(ratings);
+	            board.add(dates);
+	            //System.out.println("Best Days = "+rs);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get Worst Days");
+		}
+		return board;
+	}
+	
+	public ArrayList<ArrayList<String>> getBestDays(){
+		ArrayList<ArrayList<String>> board = new ArrayList<ArrayList<String>>();
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"select avg(rating),date from dishRating " +
+						"group by date order by avg(rating) DESC LIMIT 5;";
+				System.out.println(line);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server get avg_dish");
+				ArrayList<String> ratings = new ArrayList<String>();
+				ArrayList<String> dates = new ArrayList<String>();
+	            while(rs.next()) {
+	            	ratings.add(rs.getString(1));
+	            	dates.add(rs.getString(2));
+	            }
+	            board.add(ratings);
+	            board.add(dates);
+	            //System.out.println("Best Days = "+rs);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Get Best Days");
+		}
+		return board;
+	}
+	
 	public float getAvgDishRating(String name, String date){
 		Connection con = connection;
 		if(con!=null){
@@ -36,8 +165,8 @@ public class Server {
 			try {
 				st = con.createStatement();
 				String line = 
-						"SELECT AVG(rating) from dishRating WHERE date=" + date +
-						" and dish= '"+ name+ "';";
+						"SELECT AVG(rating) from dishRating WHERE date='" + date +
+						"' and dish= '"+ name+ "';";
 				System.out.println(line);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_dish");
@@ -64,8 +193,8 @@ public class Server {
 			try {
 				st = con.createStatement();
 				String line = 
-						"SELECT AVG(rating) from dishRating WHERE date=" + date +
-						" and dish= '"+ name+ "' and user = '" + user +"';";
+						"SELECT AVG(rating) from dishRating WHERE date='" + date +
+						"' and dish= '"+ name+ "' and user = '" + user +"';";
 				System.out.println(line);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get user_dish");
@@ -92,7 +221,7 @@ public class Server {
 			try {
 				st = con.createStatement();
 				String line = 
-						"SELECT AVG(rating) from dishRating WHERE date=" + date +";";
+						"SELECT AVG(rating) from dishRating WHERE date='" + date +"';";
 				System.out.println(line);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_day");

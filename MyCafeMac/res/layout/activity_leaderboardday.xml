@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"  
+    android:isScrollContainer="true" 
+    android:scrollbarAlwaysDrawVerticalTrack="true" 
+    android:scrollbarStyle="outsideInset" 
+    android:scrollbars="vertical">
+        
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -14,7 +22,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/BestDayNum1"
@@ -27,17 +35,18 @@
     <TextView
       	android:id="@+id/BestDay1"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum1"/>
     
     <RatingBar 
         android:id="@+id/BestDayRating1"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -47,9 +56,8 @@
   </RelativeLayout>
 
   <RelativeLayout 
-      xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/BestDayNum2"
@@ -62,17 +70,18 @@
     <TextView
       	android:id="@+id/BestDay2"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum2"/>
     
     <RatingBar 
         android:id="@+id/BestDayRating2"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -84,7 +93,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/BestDayNum3"
@@ -97,17 +106,18 @@
     <TextView
       	android:id="@+id/BestDay3"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum3"/>
     
     <RatingBar 
         android:id="@+id/BestDayRating3"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -119,7 +129,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/BestDayNum4"
@@ -132,17 +142,18 @@
     <TextView
       	android:id="@+id/BestDay4"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum4"/>
     
     <RatingBar 
         android:id="@+id/BestDayRating4"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -154,7 +165,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/BestDayNum5"
@@ -167,17 +178,18 @@
     <TextView
       	android:id="@+id/BestDay5"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum5"/>
     
     <RatingBar 
         android:id="@+id/BestDayRating5"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -196,7 +208,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/WorstDayNum1"
@@ -209,17 +221,18 @@
     <TextView
       	android:id="@+id/WorstDay1"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum1"/>
     
     <RatingBar 
         android:id="@+id/WorstDayRating1"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -231,7 +244,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/WorstDayNum2"
@@ -244,17 +257,18 @@
     <TextView
       	android:id="@+id/WorstDay2"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum2"/>
     
     <RatingBar 
         android:id="@+id/WorstDayRating2"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -266,7 +280,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/WorstDayNum3"
@@ -279,17 +293,18 @@
     <TextView
       	android:id="@+id/WorstDay3"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum3"/>
     
     <RatingBar 
         android:id="@+id/WorstDayRating3"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -301,7 +316,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/WorstDayNum4"
@@ -314,17 +329,18 @@
     <TextView
       	android:id="@+id/WorstDay4"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum4"/>
     
     <RatingBar 
         android:id="@+id/WorstDayRating4"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -336,7 +352,7 @@
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent" >
+      android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/WorstDayNum5"
@@ -349,17 +365,18 @@
     <TextView
       	android:id="@+id/WorstDay5"
       	android:layout_width="222dp"
-      	android:layout_height="match_parent"
+      	android:layout_height="wrap_content"
       	android:textSize="30dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum5"/>
     
     <RatingBar 
         android:id="@+id/WorstDayRating5"
+        android:isIndicator="true"
         android:focusable="false"
         android:clickable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="1.0"
+		android:stepSize="0.2"
 		android:numStars="5"
 		android:rating="0.0"
 		android:layout_width="wrap_content"
@@ -368,10 +385,5 @@
     
   </RelativeLayout>
   
-  
-  
-  
-
-  
- 
 </LinearLayout>
+</ScrollView>

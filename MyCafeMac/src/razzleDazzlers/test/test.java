@@ -12,8 +12,8 @@ public class test {
 	Server tester = new Server();
 	String name1 = "Dish1";
 	String name2 = "Dish2";
-	String date1 = "11132012";
-	String date2 = "11142012";
+	String date1 = "11/13/2012";
+	String date2 = "11/14/2012";
 	String userID1 = "000000000";
 	String userID2 = "000000001";
 	
