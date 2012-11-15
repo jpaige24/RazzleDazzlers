@@ -72,7 +72,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		    		if(x > 158 && x < 212)star = (float) 3.0;
 		    		if(x > 232 && x < 289)star = (float) 4.0;
 		    		if(x > 308 && x < 364)star = (float) 5.0;
-		    		if(x > 8 && x < 364){
+		    		if(star > 0){
 		    			((RatingBar) v).setRating(star);
 			    		//System.out.println(((RatingBar) v).getRating());
 			    		TextView text = (TextView) ((View) v.getParent()).findViewById(R.id.name);

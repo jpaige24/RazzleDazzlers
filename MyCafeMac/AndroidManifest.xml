@@ -57,6 +57,11 @@
             <intent-filter>
             </intent-filter>
         </activity>
+        <activity
+            android:name="razzleDazzlers.mycafemac.DishActivity">
+            <intent-filter>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
