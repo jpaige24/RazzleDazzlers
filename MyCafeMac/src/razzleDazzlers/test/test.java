@@ -21,12 +21,41 @@ public class test {
 	public void testInsert() {
 		
 		/*testing insert*/
-		tester.insert(userID1, date1, name1, (float) 3.5);
-		tester.insert(userID2, date1, name1, (float) 4.5);
-		tester.insert(userID1, date1, name2, (float) 4.0);
-		tester.insert(userID2, date2, name1, (float) 4.0);		
-		tester.insert(userID1, date2, name2, (float) 3.5);
-		tester.insert(userID2, date2, name2, (float) 4.5);
+		if(!tester.check(userID1, date1, name1)){
+			tester.insert(userID1, date1, name1, (float) 3.5);			
+		}else{
+			System.out.println("Instance " + userID1 + " " + date1 + " " + name1 + "exists alreadys");
+		}
+		
+		if(!tester.check(userID2, date1, name1)){
+			tester.insert(userID2, date1, name1, (float) 4.5);			
+		}else{
+			System.out.println("Instance " + userID2 + " " + date1 + " " + name1 + "exists alreadys");
+		}
+		
+		if(!tester.check(userID1, date1, name2)){
+			tester.insert(userID1, date1, name2, (float) 4.0);			
+		}else{
+			System.out.println("Instance " + userID1 + " " + date1 + " " + name2 + "exists alreadys");
+		}
+		
+		if(!tester.check(userID2, date2, name1)){
+			tester.insert(userID2, date2, name1, (float) 4.0);			
+		}else{
+			System.out.println("Instance " + userID2 + " " + date2 + " " + name1 + "exists alreadys");
+		}
+		
+		if(!tester.check(userID1, date2, name2)){
+			tester.insert(userID1, date2, name2, (float) 3.5);			
+		}else{
+			System.out.println("Instance " + userID1 + " " + date2 + " " + name2 + "exists alreadys");
+		}
+		
+		if(!tester.check(userID2, date2, name2)){
+			tester.insert(userID2, date2, name2, (float) 4.5);			
+		}else{
+			System.out.println("Instance " + userID2 + " " + date2 + " " + name2 + "exists alreadys");
+		}
 		
 	}
 
@@ -78,3 +107,4 @@ public class test {
 	}
 
 }
+
