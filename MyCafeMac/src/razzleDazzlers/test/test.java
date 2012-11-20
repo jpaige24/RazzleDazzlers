@@ -86,6 +86,7 @@ public class test {
 		
 	}
 	
+	@Test
 	public void testUpdate() {
 		
 		/*testing update*/
@@ -98,6 +99,7 @@ public class test {
 		tester.update(userID2, date1, name1, (float) 4.5);
 	}
 	
+	@Test
 	public void testCheck() {
 		
 		/*testing Check*/
