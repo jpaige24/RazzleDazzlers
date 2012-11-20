@@ -11,13 +11,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-<!--
-      <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/bestdayever" />
--->  
+    
+  <ImageView
+      android:id="@+id/imageView1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/bestdayever" />
+          
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
@@ -207,13 +207,13 @@
 		android:layout_below="@+id/BestDayNum5"/>
     
   </RelativeLayout>
-<!--
+
       <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/worstdayever" />
--->
+
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
