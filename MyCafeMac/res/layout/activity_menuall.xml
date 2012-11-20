@@ -27,6 +27,19 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content">
 	</RatingBar>
+	<RatingBar 
+        android:id="@+id/ratingblue"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:layout_gravity="center_horizontal"
+        android:progressDrawable="@drawable/custom_rating_bar"
+		android:stepSize="1.0"
+		android:numStars="5"
+		android:rating="0.0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</RatingBar>
   <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"

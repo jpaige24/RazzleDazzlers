@@ -50,18 +50,27 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		TextView name = (TextView) rowView.findViewById(R.id.name);
 		name.setText(names.get(position));
 		RatingBar bar = (RatingBar) rowView.findViewById(R.id.rating);
+		RatingBar barblue = (RatingBar) rowView.findViewById(R.id.ratingblue);
 		float temp = (Float) userRating.get(position);
 		if(temp < 1){
-			bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_blue));
-			bar.setRating((Float) avg.get(position));
+			//bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_blue));
+			barblue.setRating((Float) avg.get(position));
+			bar.setVisibility(rowView.GONE);
 		}else{
-			bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_bar));
+			//bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_bar));
 			bar.setRating((Float) userRating.get(position));
+			barblue.setVisibility(rowView.GONE);
 		}
-		bar.setTag(position);
-		bar.setFocusable(false);
-		bar.setFocusableInTouchMode(false);
-		bar.setOnTouchListener(new OnTouchListener() {
+		RatingBar ratedBar;
+		if (bar.getVisibility() == rowView.GONE){
+			ratedBar = barblue;
+		}else{
+			ratedBar = bar;
+		}
+		ratedBar.setTag(position);
+		ratedBar.setFocusable(false);
+		ratedBar.setFocusableInTouchMode(false);
+		ratedBar.setOnTouchListener(new OnTouchListener() {
 		    public boolean onTouch(View v, MotionEvent event) {
 		    	int action = event.getAction() & MotionEvent.ACTION_MASK;
 		    	if (action == MotionEvent.ACTION_DOWN){
