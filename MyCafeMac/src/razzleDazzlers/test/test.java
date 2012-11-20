@@ -24,37 +24,37 @@ public class test {
 		if(!tester.check(userID1, date1, name1)){
 			tester.insert(userID1, date1, name1, (float) 3.5);			
 		}else{
-			System.out.println("Instance " + userID1 + " " + date1 + " " + name1 + "exists alreadys");
+			System.out.println("Instance " + userID1 + " " + date1 + " " + name1 + "exists already");
 		}
 		
 		if(!tester.check(userID2, date1, name1)){
 			tester.insert(userID2, date1, name1, (float) 4.5);			
 		}else{
-			System.out.println("Instance " + userID2 + " " + date1 + " " + name1 + "exists alreadys");
+			System.out.println("Instance " + userID2 + " " + date1 + " " + name1 + "exists already");
 		}
 		
 		if(!tester.check(userID1, date1, name2)){
 			tester.insert(userID1, date1, name2, (float) 4.0);			
 		}else{
-			System.out.println("Instance " + userID1 + " " + date1 + " " + name2 + "exists alreadys");
+			System.out.println("Instance " + userID1 + " " + date1 + " " + name2 + "exists already");
 		}
 		
 		if(!tester.check(userID2, date2, name1)){
 			tester.insert(userID2, date2, name1, (float) 4.0);			
 		}else{
-			System.out.println("Instance " + userID2 + " " + date2 + " " + name1 + "exists alreadys");
+			System.out.println("Instance " + userID2 + " " + date2 + " " + name1 + "exists already");
 		}
 		
 		if(!tester.check(userID1, date2, name2)){
 			tester.insert(userID1, date2, name2, (float) 3.5);			
 		}else{
-			System.out.println("Instance " + userID1 + " " + date2 + " " + name2 + "exists alreadys");
+			System.out.println("Instance " + userID1 + " " + date2 + " " + name2 + "exists already");
 		}
 		
 		if(!tester.check(userID2, date2, name2)){
 			tester.insert(userID2, date2, name2, (float) 4.5);			
 		}else{
-			System.out.println("Instance " + userID2 + " " + date2 + " " + name2 + "exists alreadys");
+			System.out.println("Instance " + userID2 + " " + date2 + " " + name2 + "exists already");
 		}
 		
 	}
@@ -64,7 +64,7 @@ public class test {
 
 		/*testing getAvgDishRating*/
 		assertEquals((float) 4, tester.getAvgDishRating(name1, date1), DELTA);
-		assertEquals((float) 4.5, tester.getAvgDishRating(name1, date2), DELTA);
+		assertEquals((float) 4, tester.getAvgDishRating(name1, date2), DELTA);
 				
 	}
 	
@@ -73,9 +73,8 @@ public class test {
 		
 		/*testing getUserDishRating*/
 		assertEquals((float) 3.5, tester.getUserDishRating(name1, date1, userID1), DELTA);
-		assertEquals((float) 4.5, tester.getUserDishRating(name2, date1, userID1), DELTA);
+		assertEquals((float) 4.0, tester.getUserDishRating(name2, date1, userID1), DELTA);
 		
-		fail("Not yet implemented");
 		
 	}
 	
@@ -88,15 +87,20 @@ public class test {
 		
 	}
 	
+	@Test
 	public void testUpdate() {
 		
 		/*testing update*/
 		tester.update(userID1, date1, name1, (float) 4.0);
 		tester.update(userID2, date1, name1, (float) 4.0);
 		assertEquals((float) 4.0, tester.getDayRating(date1), DELTA);
-	
+		
+		// now update the ratings back:
+		tester.update(userID1, date1, name1, (float) 3.5);
+		tester.update(userID2, date1, name1, (float) 4.5);
 	}
 	
+	@Test
 	public void testCheck() {
 		
 		/*testing Check*/
