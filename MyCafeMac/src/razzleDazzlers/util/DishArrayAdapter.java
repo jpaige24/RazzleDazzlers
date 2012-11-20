@@ -28,6 +28,9 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	private final String date;
 	private String dishName;
 	private float r;
+	private View rowView;
+	private RatingBar bar;
+	private RatingBar barblue;
  
 	public DishArrayAdapter(Context context, ArrayList<String> names, ArrayList<String> des, String tmDevice, String date,
 			ArrayList userRating, ArrayList avg) {
@@ -46,11 +49,11 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		LayoutInflater inflater = (LayoutInflater) context
 			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
  
-		View rowView = inflater.inflate(R.layout.activity_menuall, parent, false);
+		rowView = inflater.inflate(R.layout.activity_menuall, parent, false);
 		TextView name = (TextView) rowView.findViewById(R.id.name);
 		name.setText(names.get(position));
-		RatingBar bar = (RatingBar) rowView.findViewById(R.id.rating);
-		RatingBar barblue = (RatingBar) rowView.findViewById(R.id.ratingblue);
+		bar = (RatingBar) rowView.findViewById(R.id.rating);
+		barblue = (RatingBar) rowView.findViewById(R.id.ratingblue);
 		float temp = (Float) userRating.get(position);
 		if(temp < 1){
 			//bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_blue));
@@ -97,6 +100,11 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 			    			}
 			    		};
 			    		t.start();
+			    		if (bar.getVisibility() == rowView.GONE){
+			    			bar.setVisibility(rowView.VISIBLE);
+				    		bar.setRating(r);
+				    		barblue.setVisibility(rowView.GONE);
+			    		}
 		    		}
 		    	}
 	    		return false;
