@@ -28,9 +28,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	private final String date;
 	private String dishName;
 	private float r;
-	private View rowView;
-	private RatingBar bar;
-	private RatingBar barblue;
+	ViewGroup parentGroup;
  
 	public DishArrayAdapter(Context context, ArrayList<String> names, ArrayList<String> des, String tmDevice, String date,
 			ArrayList userRating, ArrayList avg) {
@@ -48,12 +46,12 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
 			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
- 
-		rowView = inflater.inflate(R.layout.activity_menuall, parent, false);
+		parentGroup = parent;
+		View rowView = inflater.inflate(R.layout.activity_menuall, parent, false);
 		TextView name = (TextView) rowView.findViewById(R.id.name);
 		name.setText(names.get(position));
-		bar = (RatingBar) rowView.findViewById(R.id.rating);
-		barblue = (RatingBar) rowView.findViewById(R.id.ratingblue);
+		final RatingBar bar = (RatingBar) rowView.findViewById(R.id.rating);
+		RatingBar barblue = (RatingBar) rowView.findViewById(R.id.ratingblue);
 		float temp = (Float) userRating.get(position);
 		if(temp < 1){
 			//bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_blue));
@@ -65,15 +63,52 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 			barblue.setVisibility(rowView.GONE);
 		}
 		RatingBar ratedBar;
-		if (bar.getVisibility() == rowView.GONE){
-			ratedBar = barblue;
-		}else{
-			ratedBar = bar;
-		}
-		ratedBar.setTag(position);
-		ratedBar.setFocusable(false);
-		ratedBar.setFocusableInTouchMode(false);
-		ratedBar.setOnTouchListener(new OnTouchListener() {
+//		if (bar.getVisibility() == rowView.GONE){
+//			ratedBar = barblue;
+//		}else{
+//			ratedBar = bar;
+//		}
+		barblue.setTag(position);
+		barblue.setFocusable(false);
+		barblue.setFocusableInTouchMode(false);
+		barblue.setOnTouchListener(new OnTouchListener() {
+		    public boolean onTouch(View v, MotionEvent event) {
+		    	int action = event.getAction() & MotionEvent.ACTION_MASK;
+		    	if (action == MotionEvent.ACTION_DOWN){
+		    		float x = event.getX();
+		    		float y = event.getY();
+		    		System.out.println("****"+x+"****"+y);
+		    		float star = (float) 0.0;
+		    		if(x > 8 && x < 63)star = (float) 1.0;
+		    		if(x > 83 && x < 140)star = (float) 2.0;
+		    		if(x > 158 && x < 212)star = (float) 3.0;
+		    		if(x > 232 && x < 289)star = (float) 4.0;
+		    		if(x > 308 && x < 364)star = (float) 5.0;
+		    		if(star > 0){
+			    		v.setVisibility(View.GONE);
+		    			bar.setVisibility(View.VISIBLE);
+		    			bar.setRating(star);
+			    		//System.out.println(((RatingBar) v).getRating());
+			    		TextView text = (TextView) ((View) v.getParent()).findViewById(R.id.name);
+			    		//System.out.println(text.getText().toString());
+			    		dishName = text.getText().toString();
+			    		r = bar.getRating();
+			    		userRating.set((Integer) v.getTag(), r);
+			    		Thread t = new Thread(){
+			    			public void run(){
+			    				submitRating(dishName, device, r, date);
+			    			}
+			    		};
+			    		t.start();
+		    		}
+		    	}
+	    		return false;
+		    }
+		});
+		bar.setTag(position);
+		bar.setFocusable(false);
+		bar.setFocusableInTouchMode(false);
+		bar.setOnTouchListener(new OnTouchListener() {
 		    public boolean onTouch(View v, MotionEvent event) {
 		    	int action = event.getAction() & MotionEvent.ACTION_MASK;
 		    	if (action == MotionEvent.ACTION_DOWN){
@@ -100,11 +135,6 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 			    			}
 			    		};
 			    		t.start();
-			    		if (bar.getVisibility() == rowView.GONE){
-			    			bar.setVisibility(rowView.VISIBLE);
-				    		bar.setRating(r);
-				    		barblue.setVisibility(rowView.GONE);
-			    		}
 		    		}
 		    	}
 	    		return false;

@@ -138,6 +138,11 @@ public class MenuAllActivity extends ListActivity {
 		Float ratingFloat = rating.getRating();
 		dishIntent.putExtra("dishRating", ratingFloat);
 		
+		RatingBar ratingblue = (RatingBar) v.findViewById(R.id.ratingblue);
+		Float ratingblueFloat = ratingblue.getRating();
+		dishIntent.putExtra("avgRating", ratingblueFloat);
+		System.out.println("%%%%%%%%" + ratingblueFloat);
+		
 		dishIntent.putExtra("device", tmDevice);
 		dishIntent.putExtra("date", date);
 		//System.out.println(text);

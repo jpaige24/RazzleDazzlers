@@ -29,15 +29,57 @@ public class DishActivity extends Activity {
         String dishName = getIntent().getStringExtra("dishName");
         String dishDescription = getIntent().getStringExtra("dishDescription");
         float rating = getIntent().getFloatExtra("dishRating", 0);
+        float ratingblue = getIntent().getFloatExtra("avgRating", 0);
+        RatingBar ratingBarblue = (RatingBar) findViewById(R.id.DishInfo_ratingBarblue);
+        final RatingBar ratingBar = (RatingBar) findViewById(R.id.DishInfo_ratingBar);
         
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.DishInfo_ratingBar);
-        ratingBar.setRating(rating);
+        if(rating < 1){
+        	ratingBarblue.setRating(ratingblue);
+        	ratingBar.setVisibility(View.GONE);
+        }else{
+            ratingBar.setRating(rating);
+            ratingBarblue.setVisibility(View.GONE);
+        }
         
         TextView dishNameView = (TextView) findViewById(R.id.DishInfo_name);
         dishNameView.setText(dishName);
         
         TextView dishDescriptionView = (TextView) findViewById(R.id.DishInfo_description);
         dishDescriptionView.setText(dishDescription);
+        
+        ratingBarblue.setOnTouchListener(new OnTouchListener() {
+		    public boolean onTouch(View v, MotionEvent event) {
+		    	int action = event.getAction() & MotionEvent.ACTION_MASK;
+		    	if (action == MotionEvent.ACTION_DOWN){
+		    		float x = event.getX();
+		    		float y = event.getY();
+		    		System.out.println("****"+x+"****"+y);
+		    		float star = (float) 0.0;
+		    		if(x > 8 && x < 63)star = (float) 1.0;
+		    		if(x > 83 && x < 140)star = (float) 2.0;
+		    		if(x > 158 && x < 212)star = (float) 3.0;
+		    		if(x > 232 && x < 289)star = (float) 4.0;
+		    		if(x > 308 && x < 364)star = (float) 5.0;
+		    		if(star > 0){
+			    		v.setVisibility(View.GONE);
+		    			ratingBar.setVisibility(View.VISIBLE);
+		    			ratingBar.setRating(star);
+			    		//System.out.println(((RatingBar) v).getRating());
+			    		TextView text = (TextView) ((View) v.getParent()).findViewById(R.id.DishInfo_name);
+			    		//System.out.println(text.getText().toString());
+			    		name = text.getText().toString();
+			    		r = ratingBar.getRating();
+			    		Thread t = new Thread(){
+			    			public void run(){
+			    				submitRating(name, device, r, date);
+			    			}
+			    		};
+			    		t.start();
+		    		}
+		    	}
+	    		return false;
+		    }
+		});
         
         ratingBar.setOnTouchListener(new OnTouchListener() {
 		    public boolean onTouch(View v, MotionEvent event) {

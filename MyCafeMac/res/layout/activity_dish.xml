@@ -36,6 +36,20 @@
             android:numStars="5"
             android:progressDrawable="@drawable/custom_rating_bar"
             android:rating="0.0"
+            android:stepSize="1.0" />
+        <RatingBar
+            android:id="@+id/DishInfo_ratingBarblue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fitsSystemWindows="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:minHeight="57dip"
+            android:gravity="center_horizontal"
+            android:numStars="5"
+            android:progressDrawable="@drawable/custom_rating_blue"
+            android:rating="0.0"
             android:stepSize="0.1" />
 
         <TextView
