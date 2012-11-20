@@ -90,7 +90,7 @@ public class LeaderboardDayActivity extends Activity {
 		bar9.setFocusable(false);
 		bar9.setFocusableInTouchMode(false);
 		
-		TextView WD5= (TextView) findViewById(R.id.WorstDay1);
+		TextView WD5= (TextView) findViewById(R.id.WorstDay5);
         WD5.setText(worstDays.get(4));
 		RatingBar bar10 = (RatingBar) findViewById(R.id.WorstDayRating5);
 		bar10.setRating((float) worstRatings.get(4));

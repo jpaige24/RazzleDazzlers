@@ -19,29 +19,33 @@ public final class R {
         public static final int white=0x7f040000;
     }
     public static final class drawable {
-        public static final int bg_rect=0x7f020000;
-        public static final int bowlblue=0x7f020001;
-        public static final int bowlbluesmall=0x7f020002;
-        public static final int bowlempty=0x7f020003;
-        public static final int bowlemptysmall=0x7f020004;
-        public static final int bowlfill=0x7f020005;
-        public static final int custom_rating_bar=0x7f020006;
-        public static final int custom_rating_bar_small=0x7f020007;
-        public static final int custom_rating_blue=0x7f020008;
-        public static final int dot=0x7f020009;
-        public static final int ic_action_line_chart_blue=0x7f02000a;
-        public static final int ic_action_line_chart_white=0x7f02000b;
-        public static final int ic_action_news_blue=0x7f02000c;
-        public static final int ic_action_news_white=0x7f02000d;
-        public static final int ic_action_search=0x7f02000e;
-        public static final int ic_launcher=0x7f02000f;
-        public static final int icon_leaderboard_tab=0x7f020010;
-        public static final int icon_leaderboardday_tab=0x7f020011;
-        public static final int icon_leaderboarddish_tab=0x7f020012;
-        public static final int icon_menu_tab=0x7f020013;
-        public static final int icon_menuall_tab=0x7f020014;
-        public static final int icon_menuvege_tab=0x7f020015;
-        public static final int splashscreen=0x7f020016;
+        public static final int bestdayever=0x7f020000;
+        public static final int bestdishever=0x7f020001;
+        public static final int bg_rect=0x7f020002;
+        public static final int bowlblue=0x7f020003;
+        public static final int bowlbluesmall=0x7f020004;
+        public static final int bowlempty=0x7f020005;
+        public static final int bowlemptysmall=0x7f020006;
+        public static final int bowlfill=0x7f020007;
+        public static final int custom_rating_bar=0x7f020008;
+        public static final int custom_rating_bar_small=0x7f020009;
+        public static final int custom_rating_blue=0x7f02000a;
+        public static final int dot=0x7f02000b;
+        public static final int ic_action_line_chart_blue=0x7f02000c;
+        public static final int ic_action_line_chart_white=0x7f02000d;
+        public static final int ic_action_news_blue=0x7f02000e;
+        public static final int ic_action_news_white=0x7f02000f;
+        public static final int ic_action_search=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int icon_leaderboard_tab=0x7f020012;
+        public static final int icon_leaderboardday_tab=0x7f020013;
+        public static final int icon_leaderboarddish_tab=0x7f020014;
+        public static final int icon_menu_tab=0x7f020015;
+        public static final int icon_menuall_tab=0x7f020016;
+        public static final int icon_menuvege_tab=0x7f020017;
+        public static final int splashscreen=0x7f020018;
+        public static final int worstdayever=0x7f020019;
+        public static final int worstdishever=0x7f02001a;
     }
     public static final class id {
         public static final int BestDay1=0x7f080007;

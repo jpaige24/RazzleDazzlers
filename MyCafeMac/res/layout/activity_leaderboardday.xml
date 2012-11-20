@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent"  
-    android:isScrollContainer="true" 
-    android:scrollbarAlwaysDrawVerticalTrack="true" 
-    android:scrollbarStyle="outsideInset" 
-    android:scrollbars="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:isScrollContainer="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbarStyle="outsideInset"
+    android:scrollbars="vertical" >
         
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-  
-  <TextView 
-      android:text="Best Day Ever"
-      android:padding="10dip"
-      android:textSize="25dp"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"/>
+
+      <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bestdayever" />
   
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,25 +27,10 @@
          android:id="@+id/BestDayNum1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="1. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <RatingBar 
-        android:id="@+id/BestDayRating1"
-        android:isIndicator="true"
-        android:focusable="false"
-        android:clickable="false"
-        android:focusableInTouchMode="false"
-		android:stepSize="0.1"
-		android:progressDrawable="@drawable/custom_rating_bar_small"
-		android:layout_centerHorizontal="true"
-		android:numStars="5"
-		android:rating="0.0"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDayNum1"/>
-
+
     <TextView
         android:id="@+id/BestDay1"
         android:layout_width="222dp"
@@ -54,7 +38,22 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/BestDayNum1"
         android:text="This is a test"
-        android:textSize="30dp" />
+        android:textSize="25dp" />
+
+    <RatingBar
+        android:id="@+id/BestDayRating1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BestDay1"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressDrawable="@drawable/custom_rating_bar_small"
+        android:rating="0.0"
+        android:stepSize="0.1" />
     
   </RelativeLayout>
 
@@ -66,7 +65,7 @@
          android:id="@+id/BestDayNum2"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="2. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -74,7 +73,7 @@
       	android:id="@+id/BestDay2"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum2"/>
     
@@ -104,7 +103,7 @@
          android:id="@+id/BestDayNum3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="3. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -112,7 +111,7 @@
       	android:id="@+id/BestDay3"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum3"/>
     
@@ -142,7 +141,7 @@
          android:id="@+id/BestDayNum4"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="4. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -150,7 +149,7 @@
       	android:id="@+id/BestDay4"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum4"/>
     
@@ -180,7 +179,7 @@
          android:id="@+id/BestDayNum5"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="5. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -188,7 +187,7 @@
       	android:id="@+id/BestDay5"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDayNum5"/>
     
@@ -208,14 +207,13 @@
 		android:layout_below="@+id/BestDayNum5"/>
     
   </RelativeLayout>
-  
-  <TextView 
-      android:text="Worst Day Ever"
-      android:padding="10dip"
-      android:textSize="25dp"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"/>
-  
+
+      <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/worstdayever" />
+
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
@@ -225,7 +223,7 @@
          android:id="@+id/WorstDayNum1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="1. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -233,7 +231,7 @@
       	android:id="@+id/WorstDay1"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum1"/>
     
@@ -263,7 +261,7 @@
          android:id="@+id/WorstDayNum2"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="2. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -271,7 +269,7 @@
       	android:id="@+id/WorstDay2"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum2"/>
     
@@ -301,7 +299,7 @@
          android:id="@+id/WorstDayNum3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="3. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -309,7 +307,7 @@
       	android:id="@+id/WorstDay3"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum3"/>
     
@@ -339,7 +337,7 @@
          android:id="@+id/WorstDayNum4"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="4. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -347,7 +345,7 @@
       	android:id="@+id/WorstDay4"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum4"/>
     
@@ -367,17 +365,17 @@
 		android:layout_below="@+id/WorstDayNum4"/>
     
   </RelativeLayout>
-  
-  <RelativeLayout 
+  
+  <RelativeLayout
       xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="fill_parent"
+      android:layout_width="316dp"
       android:layout_height="wrap_content" >
     
     <TextView
          android:id="@+id/WorstDayNum5"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="25dp"
          android:text="5. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -385,7 +383,7 @@
       	android:id="@+id/WorstDay5"
       	android:layout_width="222dp"
       	android:layout_height="wrap_content"
-      	android:textSize="30dp"
+      	android:textSize="25dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDayNum5"/>
     

@@ -11,32 +11,31 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-  
-  <TextView 
-      android:text="Best Dish Ever"
-      android:padding="10dip"
-      android:textSize="25dp"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bestdishever" />
 
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent" >
-    
+    
     <TextView
-         android:id="@+id/BestDishNum1"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:textSize="30dp"
-         android:text="1. "
-         android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:id="@+id/BestDishNum1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="22dp" />
     
     <TextView
       	android:id="@+id/BestDish1"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDishNum1"/>
     
@@ -66,7 +65,7 @@
          android:id="@+id/BestDishNum2"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="2. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -74,7 +73,7 @@
       	android:id="@+id/BestDish2"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDishNum2"/>
     
@@ -104,7 +103,7 @@
          android:id="@+id/BestDishNum3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="3. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -112,24 +111,24 @@
       	android:id="@+id/BestDish3"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDishNum3"/>
-    
-    <RatingBar 
+
+    <RatingBar
         android:id="@+id/BestDishRating3"
-        android:isIndicator="true"
-        android:focusable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BestDish3"
+        android:layout_centerHorizontal="true"
         android:clickable="false"
+        android:focusable="false"
         android:focusableInTouchMode="false"
-		android:stepSize="0.1"
-		android:progressDrawable="@drawable/custom_rating_bar_small"
-		android:layout_centerHorizontal="true"
-		android:numStars="5"
-		android:rating="0.0"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/BestDish3"/>
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressDrawable="@drawable/custom_rating_bar_small"
+        android:rating="0.0"
+        android:stepSize="0.1" />
     
   </RelativeLayout>
   
@@ -142,7 +141,7 @@
          android:id="@+id/BestDishNum4"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="4. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -150,7 +149,7 @@
       	android:id="@+id/BestDish4"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDishNum4"/>
     
@@ -180,7 +179,7 @@
          android:id="@+id/BestDishNum5"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="5. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -188,7 +187,7 @@
       	android:id="@+id/BestDish5"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/BestDishNum5"/>
     
@@ -208,13 +207,12 @@
 		android:layout_below="@+id/BestDish5"/>
     
   </RelativeLayout>
-  
-  <TextView 
-      android:text="Worst Dish Ever"
-      android:padding="10dip"
-      android:textSize="25dp"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/worstdishever" />
   
   <RelativeLayout 
       xmlns:android="http://schemas.android.com/apk/res/android"
@@ -225,7 +223,7 @@
          android:id="@+id/WorstDishNum1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="1. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -233,7 +231,7 @@
       	android:id="@+id/WorstDish1"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDishNum1"/>
     
@@ -263,7 +261,7 @@
          android:id="@+id/WorstDishNum2"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="2. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -271,7 +269,7 @@
       	android:id="@+id/WorstDish2"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDishNum2"/>
     
@@ -301,7 +299,7 @@
          android:id="@+id/WorstDishNum3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="3. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -309,7 +307,7 @@
       	android:id="@+id/WorstDish3"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDishNum3"/>
     
@@ -339,7 +337,7 @@
          android:id="@+id/WorstDishNum4"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="4. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -347,7 +345,7 @@
       	android:id="@+id/WorstDish4"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDishNum4"/>
     
@@ -377,7 +375,7 @@
          android:id="@+id/WorstDishNum5"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="30dp"
+         android:textSize="22dp"
          android:text="5. "
          android:textAppearance="?android:attr/textAppearanceLarge" />
     
@@ -385,7 +383,7 @@
       	android:id="@+id/WorstDish5"
       	android:layout_width="match_parent"
       	android:layout_height="match_parent"
-      	android:textSize="30dp"
+      	android:textSize="22dp"
       	android:text="This is a test" 
       	android:layout_toRightOf="@+id/WorstDishNum5"/>
     
