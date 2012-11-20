@@ -52,8 +52,10 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		RatingBar bar = (RatingBar) rowView.findViewById(R.id.rating);
 		float temp = (Float) userRating.get(position);
 		if(temp < 1){
+			bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_blue));
 			bar.setRating((Float) avg.get(position));
 		}else{
+			bar.setProgressDrawable(rowView.getResources().getDrawable(R.drawable.custom_rating_bar));
 			bar.setRating((Float) userRating.get(position));
 		}
 		bar.setTag(position);
