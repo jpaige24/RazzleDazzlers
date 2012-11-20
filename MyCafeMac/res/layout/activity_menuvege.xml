@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@+id/name"
-        android:textSize="30px" >
+        android:textSize="25px" >
   </TextView>
   
   <RatingBar 
