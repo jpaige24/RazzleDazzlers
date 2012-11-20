@@ -113,14 +113,15 @@ public final class R {
         public static final int WorstDishRating4=0x7f08003f;
         public static final int WorstDishRating5=0x7f080042;
         public static final int button1=0x7f080004;
-        public static final int description=0x7f080045;
+        public static final int description=0x7f080046;
         public static final int gallery1=0x7f080005;
-        public static final int head_rating=0x7f080047;
+        public static final int head_rating=0x7f080048;
         public static final int imageView1=0x7f080006;
-        public static final int menu_settings=0x7f080048;
+        public static final int menu_settings=0x7f080049;
         public static final int name=0x7f080043;
         public static final int rating=0x7f080044;
-        public static final int today=0x7f080046;
+        public static final int ratingblue=0x7f080045;
+        public static final int today=0x7f080047;
     }
     public static final class layout {
         public static final int activity_dish=0x7f030000;
