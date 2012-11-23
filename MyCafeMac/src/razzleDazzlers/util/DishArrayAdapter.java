@@ -96,7 +96,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 			    		userRating.set((Integer) v.getTag(), r);
 			    		Thread t = new Thread(){
 			    			public void run(){
-			    				submitRating(dishName, device, r, date);
+			    				submitRating(dishName, device, r, date, context);
 			    			}
 			    		};
 			    		t.start();
@@ -131,7 +131,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 			    		userRating.set((Integer) v.getTag(), r);
 			    		Thread t = new Thread(){
 			    			public void run(){
-			    				submitRating(dishName, device, r, date);
+			    				submitRating(dishName, device, r, date, context);
 			    			}
 			    		};
 			    		t.start();
@@ -148,9 +148,9 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	
 	
 	
-	public static void submitRating(String dishName, String deviceID, float rating, String date){
+	public static void submitRating(String dishName, String deviceID, float rating, String date, Context context){
     	
-    	Server serv = new Server();
+    	Server serv = new Server(context);
     	if(serv.check(deviceID, date, dishName)){
     		serv.update(deviceID, date, dishName, rating);
     	}else{
@@ -176,7 +176,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
         	today.setToNow();
         	String date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
         	
-        	Server serv = new Server();
+        	Server serv = new Server(context);
         	if(serv.check(deviceID, date, dishName)){
         		serv.update(deviceID, date, dishName, rating);
         	}else{

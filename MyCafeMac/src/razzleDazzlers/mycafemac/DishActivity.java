@@ -3,6 +3,7 @@ package razzleDazzlers.mycafemac;
 import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.Server;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -71,7 +72,7 @@ public class DishActivity extends Activity {
 			    		r = ratingBar.getRating();
 			    		Thread t = new Thread(){
 			    			public void run(){
-			    				submitRating(name, device, r, date);
+			    				submitRating(name, device, r, date, DishActivity.this);
 			    			}
 			    		};
 			    		t.start();
@@ -103,7 +104,7 @@ public class DishActivity extends Activity {
 			    		r = ((RatingBar) v).getRating();
 			    		Thread t = new Thread(){
 			    			public void run(){
-			    				submitRating(name, device, r, date);
+			    				submitRating(name, device, r, date, DishActivity.this);
 			    			}
 			    		};
 			    		t.start();
@@ -114,9 +115,9 @@ public class DishActivity extends Activity {
 		});
 	}
 	
-	public static void submitRating(String dishName, String deviceID, float rating, String date){
+	public static void submitRating(String dishName, String deviceID, float rating, String date, Context context){
     	
-    	Server serv = new Server();
+    	Server serv = new Server(context);
     	if(serv.check(deviceID, date, dishName)){
     		serv.update(deviceID, date, dishName, rating);
     	}else{

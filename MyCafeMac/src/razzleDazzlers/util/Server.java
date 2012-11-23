@@ -8,24 +8,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Looper;
+
 public class Server {
 	
 	private static final String url = "jdbc:mysql://mathcs.macalester.edu:3306/test";
     private static final String user = "jshan";
     private static final String pass = "razzleDazzlers";
-    private static Connection connection; 
+    private static Connection connection;
+    private Context context;
 	
-	public Server(){
+	public Server(Context mcontext){
+		this.context = mcontext;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			error(context);
 		}
 		try {
 			this.connection = DriverManager.getConnection(url, user, pass);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("no connection!!!"+"Server");
+			//error(context);
 			e.printStackTrace();
 		}
 	}
@@ -41,6 +52,7 @@ public class Server {
 						"select avg(rating),dish from dishRating " +
 						"group by dish order by avg(rating) DESC LIMIT 5;";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_dish");
 				ArrayList<String> ratings = new ArrayList<String>();
@@ -54,10 +66,13 @@ public class Server {
 	            //System.out.println("Best Days = "+rs);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getBestDishes");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("Database Server Error: Get Worst Days");
+			System.out.println("Database Server Error: Get Best Dishes");
+			error(context);
 		}
 		return board;
 	}
@@ -73,6 +88,7 @@ public class Server {
 						"select avg(rating),dish from dishRating " +
 						"group by dish order by avg(rating) LIMIT 5;";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_dish");
 				ArrayList<String> ratings = new ArrayList<String>();
@@ -86,10 +102,13 @@ public class Server {
 	            //System.out.println("Best Days = "+rs);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getWorstDishes");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("Database Server Error: Get Worst Days");
+			System.out.println("Database Server Error: Get Worst Dishes");
+			error(context);
 		}
 		return board;
 	}
@@ -105,6 +124,7 @@ public class Server {
 						"select avg(rating),date from dishRating " +
 						"group by date order by avg(rating) LIMIT 5;";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_dish");
 				ArrayList<String> ratings = new ArrayList<String>();
@@ -118,10 +138,13 @@ public class Server {
 	            //System.out.println("Best Days = "+rs);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getWorstDays");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Get Worst Days");
+			error(context);
 		}
 		return board;
 	}
@@ -137,6 +160,7 @@ public class Server {
 						"select avg(rating),date from dishRating " +
 						"group by date order by avg(rating) DESC LIMIT 5;";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_dish");
 				ArrayList<String> ratings = new ArrayList<String>();
@@ -150,10 +174,13 @@ public class Server {
 	            //System.out.println("Best Days = "+rs);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getBestDays");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Get Best Days");
+			error(context);
 		}
 		return board;
 	}
@@ -168,6 +195,7 @@ public class Server {
 						"SELECT AVG(rating) from dishRating WHERE date='" + date +
 						"' and dish= '"+ name+ "';";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_dish");
 				float r = (float) 0.0;
@@ -178,10 +206,13 @@ public class Server {
 	            return r;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getAvgDishRating");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Get avg dish rating");
+			error(context);
 		}
 		return (float) 0.0;
 	}
@@ -196,6 +227,7 @@ public class Server {
 						"SELECT AVG(rating) from dishRating WHERE date='" + date +
 						"' and dish= '"+ name+ "' and user = '" + user +"';";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get user_dish");
 				float r = (float) 0.0;
@@ -206,10 +238,13 @@ public class Server {
 	            return r;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getUserDishRating");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Get user dish rating");
+			error(context);
 		}
 		return (float) 0.0;
 	}
@@ -223,6 +258,7 @@ public class Server {
 				String line = 
 						"SELECT AVG(rating) from dishRating WHERE date='" + date +"';";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server get avg_day");
 				float r = (float) 0.0;
@@ -233,10 +269,13 @@ public class Server {
 	            return r;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"getDayRating");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Get avg day rating");
+			error(context);
 		}
 		return (float) 0.0;
 	}
@@ -251,14 +290,18 @@ public class Server {
 						"INSERT INTO dishRating " + "VALUES " +
 								"('" + user + "', '" + date + "', '"+dishName + "', "+rating+");";
 				System.out.println(insertLine);
+				st.setQueryTimeout(5);
 				st.executeUpdate(insertLine);
 				System.out.println("server insert");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"insert");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Insert");
+			error(context);
 		}
 	}
 	
@@ -272,14 +315,18 @@ public class Server {
 						"UPDATE dishRating SET rating =" +rating+" WHERE user="+
 								"'" + user + "' and date= '" + date + "' and dish='"+dishName + "';";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				st.executeUpdate(line);
 				System.out.println("server update");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"update");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Update");
+			error(context);
 		}
 	}
 	
@@ -293,6 +340,7 @@ public class Server {
 						"SELECT * FROM dishRating WHERE user="  +
 								"'" + user + "' and date='" + date + "' and dish= '"+dishName+"';";
 				System.out.println(line);
+				st.setQueryTimeout(5);
 				ResultSet rs = st.executeQuery(line);
 				System.out.println("server check");
 				/*String result = "";
@@ -307,10 +355,13 @@ public class Server {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"check");
+				//error(context);
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("Database Server Error: Check");
+			error(context);
 		}
 		return false;
 	}
@@ -323,6 +374,7 @@ public class Server {
 
             String result = "Database connection success\n";
             Statement st = con.createStatement();
+            st.setQueryTimeout(5);
             ResultSet rs = st.executeQuery("select * from test");
             ResultSetMetaData rsmd = rs.getMetaData();
 
@@ -333,8 +385,27 @@ public class Server {
         }
         catch(Exception e) {
             e.printStackTrace();
+            System.out.println("no connection!!!");
             System.out.println(e.toString());
+            //error(context);
         } 
     }
+	
+	private static void error(final Context context){
+		new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                new AlertDialog.Builder(context).setTitle("No Internet?").setCancelable(false)
+                        .setMessage("Oops. WiFi not connected or server not responding. Please check back later.").setNeutralButton("Ok", new OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            	System.exit(0);
+                            }
+                        })
+                        .create().show();
+                Looper.loop();
+            }
+        }.start();
+	}
 
 }

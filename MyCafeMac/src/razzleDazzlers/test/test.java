@@ -4,12 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import android.content.Context;
+
 import razzleDazzlers.util.Server;
 
 public class test {
 	
+	Context context;
+	
 	private static final double DELTA = 1e-15;
-	Server tester = new Server();
+	Server tester = new Server(context);
 	String name1 = "Dish1";
 	String name2 = "Dish2";
 	String date1 = "11/13/2012";

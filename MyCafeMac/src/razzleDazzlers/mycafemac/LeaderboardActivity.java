@@ -6,12 +6,18 @@ import java.util.Calendar;
 import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.Server;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
 import android.widget.TabHost;
@@ -25,8 +31,12 @@ public class LeaderboardActivity extends TabActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
         
-         InitBoard initBoard = new InitBoard();
-         initBoard.execute();
+//      if (!isOnline()){
+//    	error(LeaderboardActivity.this);
+//      }
+        
+        InitBoard initBoard = new InitBoard();
+        initBoard.execute();
     }
 	
 	private class InitBoard extends AsyncTask<String, Void, String>{
@@ -49,7 +59,7 @@ public class LeaderboardActivity extends TabActivity{
 		protected String doInBackground(String... arg0) {
 			
 	        
-	        Server serv = new Server();
+	        Server serv = new Server(LeaderboardActivity.this);
 	        bestDays = serv.getBestDays();
 	        //System.out.println(bestDays);
 	        worstDays = serv.getWorstDays();
@@ -101,5 +111,32 @@ TabHost tabHostLeaderboard = getTabHost();
         }
 		
 	}
+	
+	public boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	}
+	
+	public static void error(final Context context){
+    	new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                new AlertDialog.Builder(context).setTitle("No Internet?").setCancelable(false)
+                        .setMessage("Oops. WiFi not connected or server not responding. Please check back later.").setNeutralButton("Ok", new OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            	System.exit(0);
+                            }
+                        })
+                        .create().show();
+                Looper.loop();
+            }
+        }.start();
+    }
 	
 }

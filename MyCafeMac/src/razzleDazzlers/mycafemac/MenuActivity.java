@@ -22,6 +22,7 @@ import org.jsoup.select.Elements;
 import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.Server;
 import razzleDazzlers.util.Cache;
+import razzleDazzlers.util.CrashHandler;
 import android.app.Activity;
 import android.app.LocalActivityManager;
 import android.app.ProgressDialog;
@@ -46,6 +47,9 @@ public class MenuActivity extends TabActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        
+        CrashHandler crashHandler = CrashHandler.getInstance();    
+        crashHandler.init(this);
         
         InitNews initNews = new InitNews();
 		initNews.execute();
@@ -118,7 +122,7 @@ public class MenuActivity extends TabActivity{
 	    		}
 	    	}
 	    	
-			Server serv = new Server();
+			Server serv = new Server(MenuActivity.this);
 			r = (float) serv.getDayRating(date);
 			/*for(int i=0;i<menu.get(0).get(day).size();i+=2){
 				float temp = serv.getUserDishRating(menu.get(0).get(day).get(i), date, device);
@@ -364,6 +368,8 @@ public class MenuActivity extends TabActivity{
 		}
 		
 	}
+	
+	
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -372,4 +378,6 @@ public class MenuActivity extends TabActivity{
     }*/
     
 }
+
+
 

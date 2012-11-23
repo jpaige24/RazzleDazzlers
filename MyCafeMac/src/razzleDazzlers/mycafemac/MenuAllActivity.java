@@ -7,12 +7,18 @@ import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.DishArrayAdapter;
 import razzleDazzlers.util.Server;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
 import android.view.LayoutInflater;
@@ -43,6 +49,10 @@ public class MenuAllActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+//        if (!isOnline()){
+//        	error(MenuAllActivity.this);
+//        }
+        
 		allMenu = getIntent().getStringArrayListExtra("allMenu");
 		names = new ArrayList<String>();
 		des = new ArrayList<String>();
@@ -58,7 +68,7 @@ public class MenuAllActivity extends ListActivity {
 		
 		Thread t = new Thread(){
 			public void run(){
-				Server serv = new Server();
+				Server serv = new Server(MenuAllActivity.this);
 				for(int i=0;i<allMenu.size();i+=2){
 					float temp = serv.getUserDishRating(allMenu.get(i), date, tmDevice);
 					userRating.add(temp);
@@ -107,7 +117,7 @@ public class MenuAllActivity extends ListActivity {
 //				refreshAvgRating.add((float) 0.0);
 //			}
 //		}
-	    Server serv = new Server();
+	    Server serv = new Server(MenuAllActivity.this);
 	    float r = (float) serv.getDayRating(date);
 	    bar.setRating(r);
 	    float temp = serv.getUserDishRating(updateName, date, tmDevice);
@@ -120,6 +130,10 @@ public class MenuAllActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id){
 		
 		update = position-1;
+		
+//		if (!isOnline()){
+//        	error(MenuAllActivity.this);
+//        }
 		
 		Intent dishIntent = new Intent(MenuAllActivity.this, DishActivity.class);
 		//System.out.println("*****");
@@ -150,6 +164,33 @@ public class MenuAllActivity extends ListActivity {
 		//Toast.makeText(this, nameText, Toast.LENGTH_SHORT).show();
 		MenuAllActivity.this.startActivity(dishIntent);
 	}
+	
+	public boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	}
+	
+	public static void error(final Context context){
+    	new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                new AlertDialog.Builder(context).setTitle("No Internet?").setCancelable(false)
+                        .setMessage("Oops. WiFi not connected or server not responding. Please check back later.").setNeutralButton("Ok", new OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            	System.exit(0);
+                            }
+                        })
+                        .create().show();
+                Looper.loop();
+            }
+        }.start();
+    }
 	
 	/*@Override
 	 protected void onPause(){
