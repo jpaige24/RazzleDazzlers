@@ -16,12 +16,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="razzleDazzlers.mycafemac.MainActivity">
+            android:name="razzleDazzlers.mycafemac.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.WelcomeActivity">
+            android:name="razzleDazzlers.mycafemac.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,37 +31,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.MenuActivity">
+            android:name="razzleDazzlers.mycafemac.MenuActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.LeaderboardActivity">
+            android:name="razzleDazzlers.mycafemac.LeaderboardActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.MenuAllActivity">
+            android:name="razzleDazzlers.mycafemac.MenuAllActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.MenuVegeActivity">
+            android:name="razzleDazzlers.mycafemac.MenuVegeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.LeaderboardDayActivity">
+            android:name="razzleDazzlers.mycafemac.LeaderboardDayActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.LeaderboardDishActivity">
+            android:name="razzleDazzlers.mycafemac.LeaderboardDishActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name="razzleDazzlers.mycafemac.DishActivity">
+            android:name="razzleDazzlers.mycafemac.DishActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
             </intent-filter>
         </activity>
