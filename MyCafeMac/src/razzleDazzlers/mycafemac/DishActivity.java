@@ -56,11 +56,11 @@ public class DishActivity extends Activity {
 		    		float y = event.getY();
 		    		System.out.println("****"+x+"****"+y);
 		    		float star = (float) 0.0;
-		    		if(x > 8 && x < 63)star = (float) 1.0;
-		    		if(x > 83 && x < 140)star = (float) 2.0;
-		    		if(x > 158 && x < 212)star = (float) 3.0;
-		    		if(x > 232 && x < 289)star = (float) 4.0;
-		    		if(x > 308 && x < 364)star = (float) 5.0;
+		    		if(x > 4 && x < 56)star = (float) 1.0;
+		    		if(x > 69 && x < 122)star = (float) 2.0;
+		    		if(x > 134 && x < 188)star = (float) 3.0;
+		    		if(x > 199 && x < 253)star = (float) 4.0;
+		    		if(x > 264 && x < 318)star = (float) 5.0;
 		    		if(star > 0){
 			    		v.setVisibility(View.GONE);
 		    			ratingBar.setVisibility(View.VISIBLE);
@@ -90,11 +90,11 @@ public class DishActivity extends Activity {
 		    		float y = event.getY();
 		    		System.out.println("****"+x+"****"+y);
 		    		float star = (float) 0.0;
-		    		if(x > 8 && x < 63)star = (float) 1.0;
-		    		if(x > 83 && x < 140)star = (float) 2.0;
-		    		if(x > 158 && x < 212)star = (float) 3.0;
-		    		if(x > 232 && x < 289)star = (float) 4.0;
-		    		if(x > 308 && x < 364)star = (float) 5.0;
+		    		if(x > 4 && x < 56)star = (float) 1.0;
+		    		if(x > 69 && x < 122)star = (float) 2.0;
+		    		if(x > 134 && x < 188)star = (float) 3.0;
+		    		if(x > 199 && x < 253)star = (float) 4.0;
+		    		if(x > 264 && x < 318)star = (float) 5.0;
 		    		if(star > 0){
 		    			((RatingBar) v).setRating(star);
 			    		//System.out.println(((RatingBar) v).getRating());
