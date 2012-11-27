@@ -45,9 +45,9 @@ public class MenuVegeActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
         
-//        if (!isOnline()){
-//        	error(MenuVegeActivity.this);
-//        }
+        if (!isOnline()){
+        	error(MenuVegeActivity.this);
+        }
 		
 		vegeMenu = getIntent().getStringArrayListExtra("vegeMenu");
 		names = new ArrayList<String>();
@@ -127,9 +127,9 @@ public class MenuVegeActivity extends ListActivity {
 		
 		update = position-1;
 		
-//      if (!isOnline()){
-//    	error(MenuVegeActivity.this);
-//    }
+		if (!isOnline()){
+			error(MenuVegeActivity.this);
+		}
 		
 		Intent dishIntent = new Intent(MenuVegeActivity.this, DishActivity.class);
 		//System.out.println("*****");

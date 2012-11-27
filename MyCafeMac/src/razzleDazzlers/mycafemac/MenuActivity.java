@@ -24,14 +24,17 @@ import razzleDazzlers.util.Server;
 import razzleDazzlers.util.Cache;
 import razzleDazzlers.util.CrashHandler;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.LocalActivityManager;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
 import android.view.View;
@@ -48,11 +51,11 @@ public class MenuActivity extends TabActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         
-        CrashHandler crashHandler = CrashHandler.getInstance();    
-        crashHandler.init(this);
-        
         InitNews initNews = new InitNews();
 		initNews.execute();
+		
+		CrashHandler crashHandler = CrashHandler.getInstance();    
+        crashHandler.init(this);
     }
     
     private class InitNews extends AsyncTask<String, Void, String>{
@@ -368,8 +371,6 @@ public class MenuActivity extends TabActivity{
 		}
 		
 	}
-	
-	
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

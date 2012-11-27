@@ -49,9 +49,9 @@ public class MenuAllActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-//        if (!isOnline()){
-//        	error(MenuAllActivity.this);
-//        }
+        if (!isOnline()){
+        	error(MenuAllActivity.this);
+        }
         
 		allMenu = getIntent().getStringArrayListExtra("allMenu");
 		names = new ArrayList<String>();
@@ -131,9 +131,9 @@ public class MenuAllActivity extends ListActivity {
 		
 		update = position-1;
 		
-//		if (!isOnline()){
-//        	error(MenuAllActivity.this);
-//        }
+		if (!isOnline()){
+        	error(MenuAllActivity.this);
+        }
 		
 		Intent dishIntent = new Intent(MenuAllActivity.this, DishActivity.class);
 		//System.out.println("*****");
