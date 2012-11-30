@@ -1,7 +1,12 @@
 package razzleDazzlers.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -75,6 +80,76 @@ public class Server {
 			error(context);
 		}
 		return board;
+	}
+	
+	public ArrayList retrievePhoto(String dishName){
+		ArrayList photos = new ArrayList();
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"select photo from dishPhoto where dish = '"+dishName+"' order by ID DESC limit 2;";
+				System.out.println(line);
+				st.setQueryTimeout(5);
+				ResultSet rs = st.executeQuery(line);
+				System.out.println("server retrieve photo");
+	            while(rs.next()) {
+	            	//Blob imageBlob = rs.getBlob(1);
+	            	//InputStream binaryStream = imageBlob.getBinaryStream();
+	            	InputStream binaryStream = rs.getBinaryStream(1);
+	            	photos.add(binaryStream);
+	            }
+	            //System.out.println("Best Days = "+rs);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"retrieve photo");
+				//error(context);
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: retrieve photo");
+			error(context);
+		}
+		System.out.println("Retreive photo list length: "+photos.size());
+		return photos;
+	}
+	
+	public boolean submitPhoto(String date, String dishName, String filePath){
+		Connection con = connection;
+		if(con!=null){
+			try {
+				File file = new File(filePath);
+				FileInputStream fis = new FileInputStream(file);
+				String insertLine = "insert into dishPhoto (dish, date, photo) values (?, ?, ?);";
+				PreparedStatement ps = null;
+				ps = con.prepareStatement(insertLine);
+				ps.setString(1, dishName);
+				ps.setString(2, date);
+				ps.setBinaryStream(3, fis, (int)file.length());
+				System.out.println(insertLine);
+				ps.setQueryTimeout(5);
+				ps.executeUpdate();
+				System.out.println("server submit photo");
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"submit photo");
+				//error(context);
+				e.printStackTrace();
+				return false;
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("File not found in "+"submit photo");
+				e.printStackTrace();
+				return false;
+			}
+		}else{
+			System.out.println("Database Server Error: Submit Photo");
+			error(context);
+			return false;
+		}
 	}
 	
 	public ArrayList<ArrayList<String>> getWorstDishes(){

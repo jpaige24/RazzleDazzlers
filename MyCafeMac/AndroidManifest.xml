@@ -72,6 +72,12 @@
             <intent-filter>
             </intent-filter>
         </activity>
+        <activity
+            android:name="razzleDazzlers.mycafemac.FilePickerActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

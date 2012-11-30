@@ -1,33 +1,57 @@
 package razzleDazzlers.mycafemac;
 
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+
 import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.Server;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DishActivity extends Activity {
+public class DishActivity extends Activity implements OnClickListener {
+	
+	private static final int REQUEST_PICK_FILE = 1;
+	private TextView mFilePathTextView;
+	private Button mStartActivityButton;
 	
 	String name;
 	String date;
 	String device;
 	float r;
+	private String filePath = "";
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish);
         
+        mStartActivityButton = (Button)findViewById(R.id.button1);
+        mStartActivityButton.setOnClickListener(this);
+        mFilePathTextView = (TextView)findViewById(R.id.filepath);
+        Button submitButton = (Button) findViewById(R.id.button2);
+        submitButton.setOnClickListener(this);
+        
         date = getIntent().getStringExtra("date");
         device = getIntent().getStringExtra("device");
         
         String dishName = getIntent().getStringExtra("dishName");
+        this.name = dishName;
         String dishDescription = getIntent().getStringExtra("dishDescription");
         float rating = getIntent().getFloatExtra("dishRating", 0);
         float ratingblue = getIntent().getFloatExtra("avgRating", 0);
@@ -47,6 +71,9 @@ public class DishActivity extends Activity {
         
         TextView dishDescriptionView = (TextView) findViewById(R.id.DishInfo_description);
         dishDescriptionView.setText(dishDescription);
+        
+        RetrievePhoto rp = new RetrievePhoto();
+		rp.execute();
         
         ratingBarblue.setOnTouchListener(new OnTouchListener() {
 		    public boolean onTouch(View v, MotionEvent event) {
@@ -115,6 +142,40 @@ public class DishActivity extends Activity {
 		});
 	}
 	
+	private class RetrievePhoto extends AsyncTask<String, Void, String>{
+		
+		ArrayList photos = new ArrayList();
+		
+        @Override
+        protected void onPreExecute(){}
+		
+		@Override
+		protected String doInBackground(String... arg0) {
+			Server serv = new Server(DishActivity.this);
+			photos = serv.retrievePhoto(name);
+			return null;
+		}
+		
+		@Override
+        protected void onPostExecute(String result) {
+			if(photos.size() > 0){
+				Bitmap bm1 = BitmapFactory.decodeStream((InputStream) photos.get(0));
+				ImageView iv1 = (ImageView) findViewById(R.id.photo1);
+				iv1.setScaleType(ScaleType.CENTER_INSIDE);
+				iv1.setPadding(10, 10, 0, 0);
+				iv1.setImageBitmap(bm1);
+				if(photos.size()>1){
+					Bitmap bm2 = BitmapFactory.decodeStream((InputStream) photos.get(1));
+					ImageView iv2 = (ImageView) findViewById(R.id.photo2);
+					iv2.setScaleType(ScaleType.CENTER_INSIDE);
+					iv2.setPadding(10, 10, 0, 0);
+					iv2.setImageBitmap(bm2);
+				}
+			}
+        }
+		
+	}
+	
 	public static void submitRating(String dishName, String deviceID, float rating, String date, Context context){
     	
     	Server serv = new Server(context);
@@ -131,4 +192,93 @@ public class DishActivity extends Activity {
 		 super.onPause();
 		 Toast.makeText(this, "Refreshing CafeMac ratings...", Toast.LENGTH_SHORT).show();
 	 }
+	 
+	 public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch(v.getId()) {
+			case R.id.button1:
+				// Create a new Intent for the file picker activity
+				Intent intent = new Intent(this,FilePickerActivity.class);
+				
+				// Set the initial directory to be the sdcard
+				//intent.putExtra(FilePickerActivity.EXTRA_FILE_PATH, Environment.getExternalStorageDirectory());
+				
+				// Show hidden files
+				//intent.putExtra(FilePickerActivity.EXTRA_SHOW_HIDDEN_FILES, true);
+				
+				// Only make .png files visible
+				ArrayList<String> extensions = new ArrayList<String>();
+				extensions.add(".png");
+				extensions.add(".jpg");
+				extensions.add(".bmp");
+				intent.putExtra(FilePickerActivity.EXTRA_ACCEPTED_FILE_EXTENSIONS, extensions);
+				
+				// Start the activity
+				startActivityForResult(intent, REQUEST_PICK_FILE);
+				break;
+			case R.id.button2:
+				System.out.println("submit button");
+				if (filePath.length() > 1){
+					SubmitPhoto sp = new SubmitPhoto();
+					sp.execute();
+				}
+				break;
+			}
+		}
+		
+		private class SubmitPhoto extends AsyncTask<String, Void, String>{
+			
+			Boolean submitPhoto = false;
+			
+	        @Override
+	        protected void onPreExecute(){}
+			
+			@Override
+			protected String doInBackground(String... arg0) {
+				if(submitPhoto(date, name, filePath, DishActivity.this)){
+					submitPhoto = true;
+					System.out.println("boolean"+submitPhoto);
+				}
+				return null;
+			}
+			
+			@Override
+	        protected void onPostExecute(String result) {
+				if (submitPhoto) {
+					Toast.makeText(DishActivity.this, "Your photo has been submitted", Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(DishActivity.this, "Sorry, submission failed: poor connection/file size too big.", Toast.LENGTH_SHORT).show();
+				}
+	        }
+			
+		}
+		
+		@Override
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+			if(resultCode == RESULT_OK) {
+				switch(requestCode) {
+				case REQUEST_PICK_FILE:
+					if(data.hasExtra(FilePickerActivity.EXTRA_FILE_PATH)) {
+						// Get the file path
+						File f = new File(data.getStringExtra(FilePickerActivity.EXTRA_FILE_PATH));
+						
+						// Set the file path text view
+						mFilePathTextView.setText("File path£º "+f.getPath());
+						
+						filePath = f.getPath();
+					}
+				}
+			}
+		}
+		
+		public static boolean submitPhoto(String date, String dishName, String filePath, Context context){
+	    	
+	    	Server serv = new Server(context);
+	    	if(serv.submitPhoto(date, dishName, filePath)){
+	    		System.out.println("*Photo submitted");
+	    		return true;
+	    	}else{
+	    		return false;
+	    	}
+		}
 }

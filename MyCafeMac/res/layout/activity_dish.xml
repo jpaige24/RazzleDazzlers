@@ -1,4 +1,10 @@
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:isScrollContainer="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbarStyle="outsideInset"
+    android:scrollbars="vertical" >
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -67,12 +73,44 @@
             android:id="@+id/button1"
             android:layout_width="174dp"
             android:layout_height="wrap_content"
-            android:text="Submit Picture" />
-
-        <Gallery
-            android:id="@+id/gallery1"
+            android:text="Pick Picture From Phone" />
+        
+        <TextView
+            android:id="@+id/filepath"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.69" />
+            android:gravity="center_horizontal"
+            android:paddingBottom="30dp"
+            android:paddingTop="15dp"
+            android:text="No file selected yet."/>
+        
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:text="Submit Picture" />
+
+		<ImageView
+		    android:id="@+id/photo1"
+		    android:adjustViewBounds= "true"
+		    android:layout_width="wrap_content"
+		    android:maxWidth="400dp"
+		    android:layout_height="wrap_content"
+		    android:maxHeight="300dp"
+		    android:layout_gravity="center_horizontal"
+		    android:layout_marginTop="30dp"
+		    android:src="@drawable/loading"/>
+		
+		<ImageView
+		    android:id="@+id/photo2"
+		    android:adjustViewBounds= "true"
+		    android:layout_width="wrap_content"
+		    android:maxWidth="400dp"
+		    android:layout_height="wrap_content"
+		    android:maxHeight="300dp"
+		    android:layout_gravity="center_horizontal"
+		    android:layout_marginTop="30dp"
+		    android:src="@drawable/loading"/>
 
     </LinearLayout>
+</ScrollView>
