@@ -75,6 +75,12 @@
             android:layout_height="wrap_content"
             android:text="Pick Picture From Phone" />
         
+         <Button
+            android:id="@+id/button3"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:text="Take a Picture" />
+        
         <TextView
             android:id="@+id/filepath"
             android:layout_width="match_parent"
