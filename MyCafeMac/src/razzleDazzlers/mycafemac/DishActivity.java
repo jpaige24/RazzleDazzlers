@@ -63,17 +63,18 @@ public class DishActivity extends Activity implements OnClickListener {
 		this.name = dishName;
 		String dishDescription = getIntent().getStringExtra("dishDescription");
 		float rating = getIntent().getFloatExtra("dishRating", 0);
-		float ratingblue = getIntent().getFloatExtra("avgRating", 0);
-		RatingBar ratingBarblue = (RatingBar) findViewById(R.id.DishInfo_ratingBarblue);
+//		float ratingblue = getIntent().getFloatExtra("avgRating", 0);
+//		RatingBar ratingBarblue = (RatingBar) findViewById(R.id.DishInfo_ratingBarblue);
 		final RatingBar ratingBar = (RatingBar) findViewById(R.id.DishInfo_ratingBar);
+		ratingBar.setRating(rating);
 
-		if (rating < 1) {
+/*		if (rating < 1) {
 			ratingBarblue.setRating(ratingblue);
 			ratingBar.setVisibility(View.GONE);
 		} else {
 			ratingBar.setRating(rating);
 			ratingBarblue.setVisibility(View.GONE);
-		}
+		}*/
 		
 		RatingBar miniBar = (RatingBar) findViewById(R.id.DishInfo_miniBar);
         float miniRating = getIntent().getFloatExtra("avgRating", 0);
@@ -88,7 +89,7 @@ public class DishActivity extends Activity implements OnClickListener {
 		RetrievePhoto rp = new RetrievePhoto();
 		rp.execute();
 
-		ratingBarblue.setOnTouchListener(new OnTouchListener() {
+/*		ratingBarblue.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				int action = event.getAction() & MotionEvent.ACTION_MASK;
 				if (action == MotionEvent.ACTION_DOWN) {
@@ -127,7 +128,7 @@ public class DishActivity extends Activity implements OnClickListener {
 				}
 				return false;
 			}
-		});
+		}); */
 
 		ratingBar.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
