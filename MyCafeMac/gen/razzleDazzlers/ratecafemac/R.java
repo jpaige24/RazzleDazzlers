@@ -145,12 +145,13 @@ public final class R {
         public static final int activity_main=0x7f030004;
         public static final int activity_menu=0x7f030005;
         public static final int activity_menuall=0x7f030006;
-        public static final int activity_menuheader=0x7f030007;
-        public static final int activity_menuvege=0x7f030008;
-        public static final int activity_welcome=0x7f030009;
-        public static final int file_picker_empty_view=0x7f03000a;
-        public static final int file_picker_footer=0x7f03000b;
-        public static final int file_picker_list_item=0x7f03000c;
+        public static final int activity_menuallsatsun=0x7f030007;
+        public static final int activity_menuheader=0x7f030008;
+        public static final int activity_menuvege=0x7f030009;
+        public static final int activity_welcome=0x7f03000a;
+        public static final int file_picker_empty_view=0x7f03000b;
+        public static final int file_picker_footer=0x7f03000c;
+        public static final int file_picker_list_item=0x7f03000d;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;

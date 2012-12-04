@@ -322,12 +322,13 @@ public class DishActivity extends Activity implements OnClickListener {
 				break;
 			case TAKE_A_PICTURE:
 				
+				
+				
 				File f = convertImageUriToFile(imageUri, this);
 				
 				mFilePathTextView.setText("File path£º " + f.getPath());
 				
 				filePath = f.getPath();
-				System.out.println(filePath);
 				
 			}
 		}

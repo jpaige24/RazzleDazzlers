@@ -49,13 +49,26 @@ public class MenuActivity extends TabActivity{
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Calendar calendar = Calendar.getInstance();
+		
+    	if(calendar.get(Calendar.DAY_OF_WEEK)==1||calendar.get(Calendar.DAY_OF_WEEK)==7){
+    		
+    		setContentView(R.layout.activity_menuallsatsun);
+    		/*TextView SatSun = (TextView) findViewById(R.id.MenuAllSatSun);
+    		SatSun.setText("No Menu For Today");*/
+    		
+    	}else{
+    		
         setContentView(R.layout.activity_menu);
+        
+        CrashHandler crashHandler = CrashHandler.getInstance();    
+        crashHandler.init(this);
         
         InitNews initNews = new InitNews();
 		initNews.execute();
 		
-		CrashHandler crashHandler = CrashHandler.getInstance();    
-        crashHandler.init(this);
+    	}
     }
     
     private class InitNews extends AsyncTask<String, Void, String>{
