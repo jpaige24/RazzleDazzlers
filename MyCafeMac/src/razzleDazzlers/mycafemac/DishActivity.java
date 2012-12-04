@@ -321,15 +321,15 @@ public class DishActivity extends Activity implements OnClickListener {
 				}
 				break;
 			case TAKE_A_PICTURE:
-				
-				
-				
-				File f = convertImageUriToFile(imageUri, this);
-				
-				mFilePathTextView.setText("File path£º " + f.getPath());
-				
-				filePath = f.getPath();
-				
+				Thread t = new Thread() {
+					public void run() {
+						File f = convertImageUriToFile(imageUri, DishActivity.this);
+						mFilePathTextView.setText("File path£º " + f.getPath());
+						filePath = f.getPath();
+					}
+				};
+				t.start();
+				break;
 			}
 		}
 	}
