@@ -77,7 +77,7 @@ public class MenuAllActivity extends ListActivity {
 					if(temp < 1){
 						avgRating.add(serv.getAvgDishRating(allMenu.get(i), date));
 					}else{
-						avgRating.add((float) 0.0);
+						avgRating.add(serv.getAvgDishRating(allMenu.get(i), date));
 					}
 				}
 			}
@@ -163,7 +163,8 @@ public class MenuAllActivity extends ListActivity {
 		dishIntent.putExtra("dishRating", ratingFloat);
 		
 		RatingBar ratingblue = (RatingBar) v.findViewById(R.id.ratingblue);
-		Float ratingblueFloat = ratingblue.getRating();
+		//Float ratingblueFloat = ratingblue.getRating();
+		Float ratingblueFloat = (Float) avgRating.get(update);
 		dishIntent.putExtra("avgRating", ratingblueFloat);
 		//System.out.println("%%%%%%%%" + ratingblueFloat);
 		
