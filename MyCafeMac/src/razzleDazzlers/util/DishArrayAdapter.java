@@ -143,6 +143,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		//bar.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
 		TextView description = (TextView) rowView.findViewById(R.id.description);
 		description.setText(des.get(position));
+		description.setVisibility(View.GONE);
 		return rowView;
 	}
 	

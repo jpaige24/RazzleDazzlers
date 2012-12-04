@@ -9,13 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:gravity="center_horizontal"
         android:src="@drawable/cafemactoday" />
 
     <RatingBar
         android:id="@+id/head_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/header_date"
         android:layout_centerHorizontal="true"
         android:clickable="false"
         android:focusable="false"
@@ -25,5 +26,15 @@
         android:progressDrawable="@drawable/custom_rating_header"
         android:rating="0.0"
         android:stepSize="0.1" />
+
+    <TextView
+        android:id="@+id/header_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:gravity="center_horizontal"
+        android:text="Test"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

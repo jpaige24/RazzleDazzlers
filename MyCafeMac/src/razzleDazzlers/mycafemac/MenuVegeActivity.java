@@ -1,6 +1,8 @@
 package razzleDazzlers.mycafemac;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import razzleDazzlers.ratecafemac.R;
 import razzleDazzlers.util.DishArrayAdapter;
@@ -91,6 +93,14 @@ public class MenuVegeActivity extends ListActivity {
 		bar = (RatingBar) header.findViewById(R.id.head_rating);
 		//bar.setStepSize((float) 1.0);
 		bar.setRating(r);
+		
+		//Calendar c = Calendar.getInstance();
+		//SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String currentday = new SimpleDateFormat("MM/dd/yyy").format(new Date());
+		//Date d = new Date();
+		//CharSequence s = DateFormat.format("yyyy-MM-dd", d.getTime());
+		TextView head_day = (TextView) header.findViewById(R.id.header_date);
+		head_day.setText(currentday);
 		
 		lv.addHeaderView(header, null, false);
 		//System.out.println("%%%%"+date);

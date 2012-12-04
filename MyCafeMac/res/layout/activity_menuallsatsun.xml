@@ -8,20 +8,21 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="No Menu Today.......Fell free to try Leaderbaord"
-        android:textSize="25px" 
-        android:textAppearance="?android:attr/textAppearanceLarge">
-  		</TextView>
+
         
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="438dp"
+                android:src="@drawable/weekendscreen" />
+
+        </FrameLayout>
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"

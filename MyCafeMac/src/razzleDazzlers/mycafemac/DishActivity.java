@@ -74,6 +74,10 @@ public class DishActivity extends Activity implements OnClickListener {
 			ratingBar.setRating(rating);
 			ratingBarblue.setVisibility(View.GONE);
 		}
+		
+		RatingBar miniBar = (RatingBar) findViewById(R.id.DishInfo_miniBar);
+        float miniRating = getIntent().getFloatExtra("avgRating", 0);
+        miniBar.setRating(miniRating);
 
 		TextView dishNameView = (TextView) findViewById(R.id.DishInfo_name);
 		dishNameView.setText(dishName);
