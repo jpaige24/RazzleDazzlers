@@ -331,17 +331,29 @@ public class DishActivity extends Activity implements OnClickListener {
 				}
 				break;
 			case TAKE_A_PICTURE:
-				Thread t = new Thread() {
-					public void run() {
-						File f = convertImageUriToFile(imageUri, DishActivity.this);
-						mFilePathTextView.setText("File path£º " + f.getPath());
-						filePath = f.getPath();
-					}
-				};
-				t.start();
+				takePicture tp = new takePicture();
+				tp.execute();
 				break;
 			}
 		}
+	}
+	
+	private class takePicture extends AsyncTask<String, Void, String> {
+		
+		File f;
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			f = convertImageUriToFile(imageUri, DishActivity.this);
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			mFilePathTextView.setText("File path£º " + f.getPath());
+			filePath = f.getPath();
+		}
+
 	}
 
 	public static boolean submitPhoto(String date, String dishName,
