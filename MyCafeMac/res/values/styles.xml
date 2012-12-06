@@ -1,5 +1,10 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Light" />
-
+    <color name="customred">#AC1313</color>
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:textColor">@color/customred</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:windowBackground">@drawable/bgimg</item>
+        </style>
+    
 </resources>

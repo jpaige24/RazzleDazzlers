@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -93,6 +94,7 @@ public class MenuAllActivity extends ListActivity {
 		ListView lv = getListView();
 		LayoutInflater inflater = getLayoutInflater();
 		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.activity_menuheader, lv, false);
+		lv.setCacheColorHint(Color.TRANSPARENT);
 		
 		bar = (RatingBar) header.findViewById(R.id.head_rating);
 		//bar.setStepSize((float) 1.0);
@@ -152,6 +154,7 @@ public class MenuAllActivity extends ListActivity {
 		String nameText = name.getText().toString();
 		dishIntent.putExtra("dishName", nameText);
 		
+		l.setCacheColorHint(Color.TRANSPARENT);
 		updateName = nameText;
 		
 		TextView description = (TextView) v.findViewById(R.id.description);

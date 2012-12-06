@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -73,7 +74,7 @@ public class MenuVegeActivity extends ListActivity {
 					if(temp < 1){
 						avgRating.add(serv.getAvgDishRating(vegeMenu.get(i), date));
 					}else{
-						avgRating.add((float) 0.0);
+						avgRating.add(serv.getAvgDishRating(vegeMenu.get(i), date));
 					}
 				}
 			}
@@ -87,6 +88,7 @@ public class MenuVegeActivity extends ListActivity {
 		tmDevice = getIntent().getStringExtra("device");
 		
 		ListView lv = getListView();
+		lv.setCacheColorHint(Color.TRANSPARENT);
 		LayoutInflater inflater = getLayoutInflater();
 		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.activity_menuheader, lv, false);
 		
@@ -148,6 +150,7 @@ public class MenuVegeActivity extends ListActivity {
 		String nameText = name.getText().toString();
 		dishIntent.putExtra("dishName", nameText);
 		
+		l.setCacheColorHint(Color.TRANSPARENT);
 		updateName = nameText;
 		
 		TextView description = (TextView) v.findViewById(R.id.description);
