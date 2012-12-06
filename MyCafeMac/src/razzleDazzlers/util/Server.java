@@ -405,6 +405,31 @@ public class Server {
 		}
 	}
 	
+	public void delete(String user, String date, String dishName){
+		Connection con = connection;
+		if(con!=null){
+			Statement st;
+			try {
+				st = con.createStatement();
+				String line = 
+						"DELETE FROM dishRating WHERE user="+
+								"'" + user + "' and date= '" + date + "' and dish='"+dishName + "';";
+				System.out.println(line);
+				st.setQueryTimeout(5);
+				st.executeUpdate(line);
+				System.out.println("server update");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println("no connection!!!"+"update");
+				//error(context);
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("Database Server Error: Update");
+			error(context);
+		}
+	}
+	
 	public boolean check(String user, String date, String dishName){
 		Connection con = connection;
 		if(con!=null){
