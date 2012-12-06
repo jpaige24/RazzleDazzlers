@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.sun.jndi.toolkit.url.Uri;
 
 import razzleDazzlers.ratecafemac.R;
+import razzleDazzlers.util.DishArrayAdapter;
 import razzleDazzlers.util.Server;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -18,6 +19,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.format.Time;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,18 +65,18 @@ public class DishActivity extends Activity implements OnClickListener {
 		this.name = dishName;
 		String dishDescription = getIntent().getStringExtra("dishDescription");
 		float rating = getIntent().getFloatExtra("dishRating", 0);
-//		float ratingblue = getIntent().getFloatExtra("avgRating", 0);
-//		RatingBar ratingBarblue = (RatingBar) findViewById(R.id.DishInfo_ratingBarblue);
+		//float ratingblue = getIntent().getFloatExtra("avgRating", 0);
+		//RatingBar ratingBarblue = (RatingBar) findViewById(R.id.DishInfo_ratingBarblue);
 		final RatingBar ratingBar = (RatingBar) findViewById(R.id.DishInfo_ratingBar);
 		ratingBar.setRating(rating);
-
-/*		if (rating < 1) {
+		
+		/* if (rating < 1) {
 			ratingBarblue.setRating(ratingblue);
 			ratingBar.setVisibility(View.GONE);
 		} else {
 			ratingBar.setRating(rating);
 			ratingBarblue.setVisibility(View.GONE);
-		}*/
+		} */
 		
 		RatingBar miniBar = (RatingBar) findViewById(R.id.DishInfo_miniBar);
         float miniRating = getIntent().getFloatExtra("avgRating", 0);
@@ -92,12 +94,12 @@ public class DishActivity extends Activity implements OnClickListener {
 /*		ratingBarblue.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				int action = event.getAction() & MotionEvent.ACTION_MASK;
-				if (action == MotionEvent.ACTION_DOWN) {
+				if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP) {
 					float x = event.getX();
 					float y = event.getY();
 					System.out.println("****" + x + "****" + y);
 					float star = (float) 0.0;
-					if (x > 4 && x < 56)
+					if (x < 56)
 						star = (float) 1.0;
 					if (x > 69 && x < 122)
 						star = (float) 2.0;
@@ -105,7 +107,7 @@ public class DishActivity extends Activity implements OnClickListener {
 						star = (float) 3.0;
 					if (x > 199 && x < 253)
 						star = (float) 4.0;
-					if (x > 264 && x < 318)
+					if (x > 264)
 						star = (float) 5.0;
 					if (star > 0) {
 						v.setVisibility(View.GONE);
@@ -128,17 +130,19 @@ public class DishActivity extends Activity implements OnClickListener {
 				}
 				return false;
 			}
-		}); */
+		});
+		ratingBarblue.setOnRatingBarChangeListener(new RatingBarListener(name, device));
+*/
 
 		ratingBar.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				int action = event.getAction() & MotionEvent.ACTION_MASK;
-				if (action == MotionEvent.ACTION_DOWN) {
+				if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP) {
 					float x = event.getX();
 					float y = event.getY();
 					System.out.println("****" + x + "****" + y);
 					float star = (float) 0.0;
-					if (x > 4 && x < 56)
+					if (x < 56)
 						star = (float) 1.0;
 					if (x > 69 && x < 122)
 						star = (float) 2.0;
@@ -146,7 +150,7 @@ public class DishActivity extends Activity implements OnClickListener {
 						star = (float) 3.0;
 					if (x > 199 && x < 253)
 						star = (float) 4.0;
-					if (x > 264 && x < 318)
+					if (x > 264)
 						star = (float) 5.0;
 					if (star > 0) {
 						((RatingBar) v).setRating(star);
@@ -168,6 +172,7 @@ public class DishActivity extends Activity implements OnClickListener {
 				return false;
 			}
 		});
+		ratingBar.setOnRatingBarChangeListener(new RatingBarListener(name, device));
 	}
 
 	private class RetrievePhoto extends AsyncTask<String, Void, String> {
@@ -378,4 +383,30 @@ public class DishActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	private class RatingBarListener implements RatingBar.OnRatingBarChangeListener{
+		
+		public String dishName = "";
+		public String deviceID = "";
+		
+		public RatingBarListener(String dishName, String device){
+			this.dishName = dishName;
+			this.deviceID = device;
+		}
+		  
+        public void onRatingChanged(RatingBar ratingBar, float rating,  
+                boolean fromUser) {
+        	
+        	Time today = new Time(Time.getCurrentTimezone());
+        	today.setToNow();
+        	final String date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
+        	
+            ratingBar.setRating(rating);
+    		Thread t = new Thread(){
+    			public void run(){
+    				submitRating(dishName, device, r, date, DishActivity.this);
+    			}
+    		};
+    		t.start();
+        }  
+    }
 }

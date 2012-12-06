@@ -74,16 +74,16 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 		barblue.setOnTouchListener(new OnTouchListener() {
 		    public boolean onTouch(View v, MotionEvent event) {
 		    	int action = event.getAction() & MotionEvent.ACTION_MASK;
-		    	if (action == MotionEvent.ACTION_DOWN){
+		    	if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP){
 		    		float x = event.getX();
 		    		float y = event.getY();
 		    		System.out.println("****"+x+"****"+y);
 		    		float star = (float) 0.0;
-		    		if(x > 4 && x < 56)star = (float) 1.0;
+		    		if(x < 56)star = (float) 1.0;
 		    		if(x > 69 && x < 122)star = (float) 2.0;
 		    		if(x > 134 && x < 188)star = (float) 3.0;
 		    		if(x > 199 && x < 253)star = (float) 4.0;
-		    		if(x > 264 && x < 318)star = (float) 5.0;
+		    		if(x > 264)star = (float) 5.0;
 		    		if(star > 0){
 			    		v.setVisibility(View.GONE);
 		    			bar.setVisibility(View.VISIBLE);
@@ -105,22 +105,24 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	    		return false;
 		    }
 		});
+		barblue.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
+		
 		bar.setTag(position);
 		bar.setFocusable(false);
 		bar.setFocusableInTouchMode(false);
 		bar.setOnTouchListener(new OnTouchListener() {
 		    public boolean onTouch(View v, MotionEvent event) {
 		    	int action = event.getAction() & MotionEvent.ACTION_MASK;
-		    	if (action == MotionEvent.ACTION_DOWN){
+		    	if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP){
 		    		float x = event.getX();
 		    		float y = event.getY();
 		    		System.out.println("****"+x+"****"+y);
 		    		float star = (float) 0.0;
-		    		if(x > 4 && x < 56)star = (float) 1.0;
+		    		if(x < 56)star = (float) 1.0;
 		    		if(x > 69 && x < 122)star = (float) 2.0;
 		    		if(x > 134 && x < 188)star = (float) 3.0;
 		    		if(x > 199 && x < 253)star = (float) 4.0;
-		    		if(x > 264 && x < 318)star = (float) 5.0;
+		    		if(x > 264)star = (float) 5.0;
 		    		if(star > 0){
 		    			((RatingBar) v).setRating(star);
 			    		//System.out.println(((RatingBar) v).getRating());
@@ -140,7 +142,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	    		return false;
 		    }
 		});
-		//bar.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
+		bar.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
 		TextView description = (TextView) rowView.findViewById(R.id.description);
 		description.setText(des.get(position));
 		description.setVisibility(View.GONE);
@@ -175,16 +177,15 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
         	
         	Time today = new Time(Time.getCurrentTimezone());
         	today.setToNow();
-        	String date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
+        	final String date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
         	
-        	Server serv = new Server(context);
-        	if(serv.check(deviceID, date, dishName)){
-        		serv.update(deviceID, date, dishName, rating);
-        	}else{
-        		serv.insert(deviceID, date, dishName, rating);
-        	}
-            System.out.println("rating--->" + rating);
             ratingBar.setRating(rating);
+    		Thread t = new Thread(){
+    			public void run(){
+    				DishArrayAdapter.submitRating(dishName, device, r, date, context);
+    			}
+    		};
+    		t.start();
         }  
     }
 	
