@@ -13,12 +13,15 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.view.ViewPager.LayoutParams;
 import android.text.format.Time;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -28,6 +31,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +49,8 @@ public class DishActivity extends Activity implements OnClickListener {
 	float r;
 	private String filePath = "";
 	android.net.Uri imageUri;
+	Bitmap bm1;
+	Bitmap bm2;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -178,9 +184,28 @@ public class DishActivity extends Activity implements OnClickListener {
 	private class RetrievePhoto extends AsyncTask<String, Void, String> {
 
 		ArrayList photos = new ArrayList();
+		ImageView image1 = new ImageView(DishActivity.this);
+		ImageView image2 = new ImageView(DishActivity.this);
 
 		@Override
 		protected void onPreExecute() {
+			LinearLayout linearLayout = (LinearLayout)findViewById(R.id.dishLayout);
+			image1.setImageResource(R.drawable.loading);
+			LinearLayout.LayoutParams vp = 
+				    new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			image1.setLayoutParams(vp); 
+			image1.setAdjustViewBounds(true);
+			image1.setScaleType(ScaleType.CENTER_INSIDE);
+			image1.setPadding(10, 10, 0, 10);
+			image1.setMaxHeight(500);
+			linearLayout.addView(image1);
+			image2.setImageResource(R.drawable.loading);
+			image2.setLayoutParams(vp); 
+			image2.setAdjustViewBounds(true);
+			image2.setScaleType(ScaleType.CENTER_INSIDE);
+			image2.setPadding(10, 10, 0, 10);
+			image2.setMaxHeight(500);
+			linearLayout.addView(image2);
 		}
 
 		@Override
@@ -193,19 +218,21 @@ public class DishActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(String result) {
 			if (photos.size() > 0) {
-				Bitmap bm1 = BitmapFactory.decodeStream((InputStream) photos
+				bm1 = BitmapFactory.decodeStream((InputStream) photos
 						.get(0));
-				ImageView iv1 = (ImageView) findViewById(R.id.photo1);
+				/*ImageView iv1 = (ImageView) findViewById(R.id.photo1);
 				iv1.setScaleType(ScaleType.CENTER_INSIDE);
 				iv1.setPadding(10, 10, 0, 0);
-				iv1.setImageBitmap(bm1);
+				iv1.setImageBitmap(bm1);*/
+				image1.setImageBitmap(bm1);
 				if (photos.size() > 1) {
-					Bitmap bm2 = BitmapFactory
+					bm2 = BitmapFactory
 							.decodeStream((InputStream) photos.get(1));
-					ImageView iv2 = (ImageView) findViewById(R.id.photo2);
+					/*ImageView iv2 = (ImageView) findViewById(R.id.photo2);
 					iv2.setScaleType(ScaleType.CENTER_INSIDE);
 					iv2.setPadding(10, 10, 0, 0);
-					iv2.setImageBitmap(bm2);
+					iv2.setImageBitmap(bm2);*/
+					image2.setImageBitmap(bm2);
 				}
 			}
 		}
@@ -421,4 +448,10 @@ public class DishActivity extends Activity implements OnClickListener {
     		t.start();
         }  
     }
+	
+	public void onDestroy() {
+	    super.onDestroy();
+	    if (bm1 != null) bm1.recycle();
+	    if (bm2 != null) bm2.recycle();
+	}
 }
