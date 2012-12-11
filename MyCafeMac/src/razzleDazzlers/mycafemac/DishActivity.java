@@ -292,19 +292,24 @@ public class DishActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.button3:
-			String fileName = "new-photo-name.jpg";
-
-			ContentValues values = new ContentValues();
-			values.put(MediaStore.Images.Media.TITLE, fileName);
-			values.put(MediaStore.Images.Media.DESCRIPTION,
-					"Image capture by camera");
-			imageUri = getContentResolver().insert(
-					MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-			Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			takePicture.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-
-			startActivityForResult(takePicture, TAKE_A_PICTURE);
-
+			Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+			if(isSDPresent){
+				String fileName = "new-photo-name.jpg";
+				ContentValues values = new ContentValues();
+				values.put(MediaStore.Images.Media.TITLE, fileName);
+				values.put(MediaStore.Images.Media.DESCRIPTION,
+						"Image capture by camera");
+				imageUri = getContentResolver().insert(
+						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+				Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				takePicture.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+				startActivityForResult(takePicture, TAKE_A_PICTURE);
+			}else{
+				Toast.makeText(DishActivity.this,
+						"Please Insert an SD-Card.", Toast.LENGTH_SHORT)
+						.show();	
+			}
+			break;
 		}
 	}
 
