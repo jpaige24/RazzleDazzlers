@@ -190,7 +190,7 @@ public class DishActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			LinearLayout linearLayout = (LinearLayout)findViewById(R.id.dishLayout);
-			image1.setImageResource(R.drawable.loading);
+			//image1.setImageResource(R.drawable.loading);
 			LinearLayout.LayoutParams vp = 
 				    new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			image1.setLayoutParams(vp); 
@@ -199,7 +199,7 @@ public class DishActivity extends Activity implements OnClickListener {
 			image1.setPadding(10, 10, 0, 10);
 			image1.setMaxHeight(500);
 			linearLayout.addView(image1);
-			image2.setImageResource(R.drawable.loading);
+			//image2.setImageResource(R.drawable.loading);
 			image2.setLayoutParams(vp); 
 			image2.setAdjustViewBounds(true);
 			image2.setScaleType(ScaleType.CENTER_INSIDE);
