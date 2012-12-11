@@ -105,7 +105,7 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
 	    		return false;
 		    }
 		});
-		barblue.setOnRatingBarChangeListener(new RatingBarListener(name.getText().toString(), device));
+		barblue.setOnRatingBarChangeListener(new RatingBarBlueListener(name.getText().toString(), device, bar));
 		
 		bar.setTag(position);
 		bar.setFocusable(false);
@@ -161,6 +161,38 @@ public class DishArrayAdapter extends ArrayAdapter<String>{
     	}
         System.out.println("rating--->" + rating);
 	}
+	
+	private class RatingBarBlueListener implements RatingBar.OnRatingBarChangeListener{
+		
+		public String dishName = "";
+		public String deviceID = "";
+		private final RatingBar bar;
+		
+		public RatingBarBlueListener(String dishName, String device, RatingBar bar){
+			this.dishName = dishName;
+			this.deviceID = device;
+			this.bar = bar;
+		}
+		  
+        public void onRatingChanged(RatingBar ratingBar, float rating,  
+                boolean fromUser) {
+        	
+        	Time today = new Time(Time.getCurrentTimezone());
+        	today.setToNow();
+        	final String date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
+        	
+        	ratingBar.setVisibility(View.GONE);
+        	bar.setVisibility(View.VISIBLE);
+        	
+            bar.setRating(rating);
+    		Thread t = new Thread(){
+    			public void run(){
+    				DishArrayAdapter.submitRating(dishName, device, r, date, context);
+    			}
+    		};
+    		t.start();
+        }  
+    }
 	
 	private class RatingBarListener implements RatingBar.OnRatingBarChangeListener{
 		
