@@ -287,7 +287,8 @@ public class MenuActivity extends TabActivity{
 			}else if(!rawMenu.get(i).equals("Lunch") && !rawMenu.get(i).equals("Dinner") &&
 					!rawMenu.get(i).equals("Pizza") && !rawMenu.get(i).equals("Grill") &&
 					!rawMenu.get(i).equals("Global") && !rawMenu.get(i).equals("Wok") &&
-					!rawMenu.get(i).equals("Pasta") && !rawMenu.get(i).equals("Soup of the Day")) {
+					!rawMenu.get(i).equals("Pasta") && !rawMenu.get(i).equals("Soup of the Day")
+					&& !rawMenu.get(i).equals("Soup of the Week")&& !rawMenu.get(i).equals("Chili of the Week")) {
 				if (addDay){
 						//System.out.println("****"+rawMenu.get(i)+"****");
 						//System.out.println("****"+rawDescription.get(j)+"****");
