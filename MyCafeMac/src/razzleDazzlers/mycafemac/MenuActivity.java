@@ -103,7 +103,7 @@ public class MenuActivity extends TabActivity{
 			device += tm.getDeviceId();
 			Time today = new Time(Time.getCurrentTimezone());
 	    	today.setToNow();
-	    	date = Integer.toString(today.month)+'/'+Integer.toString(today.monthDay)+'/'+Integer.toString(today.year);
+	    	date = Integer.toString(today.month+1)+'/'+Integer.toString(today.monthDay)+'/'+Integer.toString(today.year);
 	    	
 	    	boolean update = needUpdate();
 	    	System.out.println("update? "+update);
