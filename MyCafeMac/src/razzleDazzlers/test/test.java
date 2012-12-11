@@ -10,10 +10,8 @@ import razzleDazzlers.util.Server;
 
 public class test {
 	
-	Context context;
-	
 	private static final double DELTA = 1e-15;
-	Server tester = new Server(context);
+	Server tester = new Server(null);
 	String name1 = "Dish1";
 	String name2 = "Dish2";
 	String date1 = "11/13/2012";
@@ -110,6 +108,15 @@ public class test {
 		assertEquals(true,tester.check(userID1, date1, name1));
 		assertEquals(true,tester.check(userID2, date1, name1));
 		assertEquals(false,tester.check(userID1, date2, name1));
+		
+	}
+	
+	@Test
+	public void testDelete() {
+		tester.delete(userID1, date1, name1);
+		tester.delete(userID2, date1, name1);
+		assertEquals(false,tester.check(userID1, date1, name1));
+		assertEquals(false,tester.check(userID2, date1, name1));
 		
 	}
 
