@@ -217,9 +217,11 @@ public class DishActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(String result) {
+			BitmapFactory.Options options=new BitmapFactory.Options();
+			options.inSampleSize = 8;
 			if (photos.size() > 0) {
 				bm1 = BitmapFactory.decodeStream((InputStream) photos
-						.get(0));
+						.get(0),null,options);
 				/*ImageView iv1 = (ImageView) findViewById(R.id.photo1);
 				iv1.setScaleType(ScaleType.CENTER_INSIDE);
 				iv1.setPadding(10, 10, 0, 0);
@@ -227,7 +229,7 @@ public class DishActivity extends Activity implements OnClickListener {
 				image1.setImageBitmap(bm1);
 				if (photos.size() > 1) {
 					bm2 = BitmapFactory
-							.decodeStream((InputStream) photos.get(1));
+							.decodeStream((InputStream) photos.get(1),null,options);
 					/*ImageView iv2 = (ImageView) findViewById(R.id.photo2);
 					iv2.setScaleType(ScaleType.CENTER_INSIDE);
 					iv2.setPadding(10, 10, 0, 0);

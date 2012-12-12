@@ -171,7 +171,8 @@ public class MenuVegeActivity extends ListActivity {
 		//System.out.println(text);
 		//String selectedValue = (String) getListAdapter().getItem(position);
 		//Toast.makeText(this, nameText, Toast.LENGTH_SHORT).show();
-		MenuVegeActivity.this.startActivity(dishIntent);
+		
+		if (isOnline()) MenuVegeActivity.this.startActivity(dishIntent);
 	}
 	
 	public boolean isOnline() {

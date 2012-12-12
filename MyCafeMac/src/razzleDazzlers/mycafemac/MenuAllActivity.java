@@ -176,7 +176,8 @@ public class MenuAllActivity extends ListActivity {
 		//System.out.println(text);
 		//String selectedValue = (String) getListAdapter().getItem(position);
 		//Toast.makeText(this, nameText, Toast.LENGTH_SHORT).show();
-		MenuAllActivity.this.startActivity(dishIntent);
+		
+		if (isOnline()) MenuAllActivity.this.startActivity(dishIntent);
 	}
 	
 	public boolean isOnline() {

@@ -63,7 +63,7 @@ public class FilePickerActivity extends ListActivity{
 	/**
 	 * The initial directory which will be used if no directory has been sent with the intent 
 	 */
-	private final static String DEFAULT_INITIAL_DIRECTORY = "/";
+	private final static String DEFAULT_INITIAL_DIRECTORY = "/sdcard/DCIM/Camera/";
 	
 	protected File mDirectory;
 	protected ArrayList<File> mFiles;
