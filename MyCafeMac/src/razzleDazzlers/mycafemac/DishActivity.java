@@ -442,10 +442,6 @@ public class DishActivity extends Activity implements OnClickListener {
         public void onRatingChanged(RatingBar ratingBar, float rating,  
                 boolean fromUser) {
         	
-        	Time today = new Time(Time.getCurrentTimezone());
-        	today.setToNow();
-        	final String date = Integer.toString(today.month) + Integer.toString(today.monthDay) + Integer.toString(today.year);
-        	
             ratingBar.setRating(rating);
     		Thread t = new Thread(){
     			public void run(){
